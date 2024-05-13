@@ -1,0 +1,22 @@
+<!--components/u-selecttime/index.wxml-->
+<u-popup show="{{show}}">
+  <view class="pop1">
+    <image bind:tap="onCancel" src="/static/icon/icon_close1.png" mode="aspectFit" class="icon-close" />
+    <view class="fs32 col-3 fwb mb50">修改时间</view>
+    <view class="flex-box flex-between mb50">
+      <picker mode="date" value="{{date}}" bindchange="dateChange">
+        <view class="box flex-box" style="width: 300rpx;">
+          <view class="fs30 col-3 flex-1 m-arrow-right">{{date.length > 0 ? date : '选择日期'}}</view>
+        </view>
+      </picker>
+      <picker mode="multiSelector" range="{{multiArray}}" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}">
+        <view class="box flex-box" style="width: 300rpx;">
+          <view class="fs30 col-3 flex-1 m-arrow-right">{{multiIndex[0] >= 0 ? (multiArray[0][multiIndex[0]] || '') + ' - ' + (multiArray[1][multiIndex[1]] || ''): '选择时间段'}} </view>
+        </view>
+      </picker>
+    </view>
+    <view bind:tap="save_change_time" class="flex-box flex-between">
+      <view class="btn2" style="width: 100%;">确认修改</view>
+    </view>
+  </view>
+</u-popup>

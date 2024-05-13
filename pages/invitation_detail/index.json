@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "u-authorize":"/components/u-authorize/index"
+  },
+  "navigationBarTitleText": "邀约详情"
+}

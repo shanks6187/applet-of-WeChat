@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "u-countdown":"/components/u-countdown/index",
+    "u-changetime":"/components/u-changetime/index",
+    "u-cancel":"/components/u-cancel/index",
+    "u-selecttime":"/components/u-selecttime/index",
+    "u-qrcode-container": "/components/u-qrcode"
+  },
+  "navigationBarTitleText": "通知消息",
+  "navigationBarBackgroundColor": "#FFFFFF",
+  "onReachBottomDistance": 30,
+  "enablePullDownRefresh":true
+}

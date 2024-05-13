@@ -1,0 +1,37 @@
+/* pages/evaluation_success/index.wxss */
+.container {
+  padding: 200rpx 60rpx 0;
+}
+
+.icon_success {
+  margin: 0 auto 50rpx;
+  display: block;
+  width: 105rpx;
+  height: 130rpx;
+}
+
+.btn1 {
+  width: 300rpx;
+  height: 110rpx;
+  border-radius: 30rpx;
+  border: 1px solid #979797;
+  font-size: 34rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #333333;
+  line-height: 110rpx;
+  text-align: center;
+}
+
+.btn2 {
+  width: 300rpx;
+  height: 110rpx;
+  border-radius: 30rpx;
+  background: #EB7D4C;
+  font-size: 34rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 110rpx;
+  text-align: center;
+}

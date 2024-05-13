@@ -1,0 +1,20 @@
+<!--components/u-changetime.wxml-->
+<u-popup show="{{show}}">
+  <view class="pop1">
+    <image bind:tap="onCancel" src="/static/icon/icon_close1.png" mode="aspectFit" class="icon-close" />
+    <view class="fs30 col-6 mb40">修改</view>
+
+    <view class="fs32 col-0 mb30 fwb tl">
+      时间点
+    </view>
+
+    <view class="flex-box flex-wrap flex-align-start pb20">
+
+      <view wx:for="{{timeList}}" wx:for-item="vo" class="time-label {{vo == choose_time ? 'active' : ''}}" bindtap="chooseTime" data-time="{{vo}}">{{vo}}</view>
+    </view>
+
+    <view bind:tap="save_change_time" class="flex-box flex-between">
+      <view class="btn2" style="width: 100%;">提交修改</view>
+    </view>
+  </view>
+</u-popup>

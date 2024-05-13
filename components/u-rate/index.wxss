@@ -1,0 +1,27 @@
+/* components/u-rate/index.wxss */
+.u-rate{
+    display:flex;
+    flex-wrap: wrap;
+	-webkit-user-select:none;
+	user-select:none;
+	font-size:0;
+}
+.u-rate__item{
+    position:relative;
+    margin-bottom: 50rpx;
+	display:inline-block;
+    vertical-align: top;
+    width: 58rpx;
+    height: 58rpx;
+}
+.u-rate__icon{
+	display:block;
+	height:1em;
+}
+.u-rate__icon--half{
+	position:absolute;
+	top:0;
+	width:.5em;
+	overflow:hidden;
+	left:0;
+}

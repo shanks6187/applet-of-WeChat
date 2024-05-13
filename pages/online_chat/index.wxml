@@ -1,0 +1,57 @@
+<!--pages/online_chat/index.wxml-->
+
+<view class="page-foot">
+  <input class="input" bindconfirm="sendMessage" confirm-type="send" placeholder="请输入" value="{{content}}" />
+</view>
+
+<scroll-view class="container" scroll-y="{{true}}" style="height: 100vh;" scroll-top="{{scrollTop}}">
+
+  <block wx:if="{{lists.length > 0}}">
+
+    <block wx:for="{{lists}}" wx:for-item="vo">
+      <view class="time">{{vo.createtime_text}}</view>
+
+      <block wx:if="{{my_user_id == vo.user_id}}">
+        <view class="flex-box flex-align-start flex-end mb30">
+          <view class="me">{{vo.message || ''}}</view>
+          <image src="/static/icon/icon_head{{vo.user.avatar || 1}}.png" mode="aspectFit" class="icon-head ml30" />
+        </view>
+      </block>
+
+      <block wx:else>
+        <view class="flex-box flex-align-start mb30">
+          <image src="/static/icon/icon_head{{vo.user.avatar || 1}}.png" mode="aspectFit" class="icon-head mr30" />
+          <view class="you">{{vo.message || ''}}</view>
+        </view>
+      </block>
+
+    </block>
+
+
+
+
+
+
+  </block>
+
+  <block wx:else>
+
+    <view style="text-align: center; line-height: 200rpx;">暂无聊天记录</view>
+
+  </block>
+
+  <view class="change" wx:if="{{update_times}}">
+    <view class="flex-box mb50">
+      <view class="fs30 col-6 mr30">修改时间</view>
+      <view class="fs30 col-3">可以把时间换成 {{update_times.change_time || ''}} 吗？</view>
+    </view>
+    <view class="flex-box tc flex-between">
+      <view class="btn1" bindtap="times_change" data-status="2">拒绝修改</view>
+      <view class="btn2" bindtap="times_change" data-status="1">同意修改</view>
+    </view>
+  </view>
+  <view class="change" wx:if="{{change_tips}}">
+    <view class="fs30 col-3">{{change_tips.title}}</view>
+  </view>
+
+</scroll-view>

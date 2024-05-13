@@ -1,0 +1,20 @@
+/* components/u-authorize/index.wxss */
+.u-authorize{ min-height: initial !important; max-height: inherit !important; }
+.u-authorize-card{ background-color: #fff;min-width: 600rpx;}
+.u-authorize-title{ position: relative; text-align: center; line-height: 90rpx; font-size: 34rpx; color: #000; }
+.u-authorize-title:after{content:" ";position:absolute;top:0;left:0;width:200%;height:200%;border:0 #dddddd solid;border-bottom-width:1px;-webkit-transform:scale(.5);transform:scale(.5);-webkit-transform-origin:0 0;transform-origin:0 0;pointer-events:none;box-sizing:border-box;}
+
+.u-authorize-body{ padding: 40rpx 80rpx; text-align: center; }
+.u-authorize-body__icon{ display: block; width: 100rpx; height: 100rpx; margin: 0 auto; }
+.u-authorize-body__title{ padding: 30rpx 0rpx; font-size: 32rpx; color: #101010; }
+.u-authorize-body__info{ position: relative; padding: 20rpx 0; font-size: 24rpx; color: #898989; }
+/* .u-authorize-body__info:after{content:" ";position:absolute;top:0;left:0;width:200%;height:200%;border:0 #dddddd solid;border-top-width:1px;-webkit-transform:scale(.5);transform:scale(.5);-webkit-transform-origin:0 0;transform-origin:0 0;pointer-events:none;box-sizing:border-box;} */
+
+.u-authorize-tool{ position: relative; display: flex; }
+.u-authorize-tool:after{content:" ";position:absolute;top:0;left:0;width:200%;height:200%;border:0 #dddddd solid;border-top-width:1px;-webkit-transform:scale(.5);transform:scale(.5);-webkit-transform-origin:0 0;transform-origin:0 0;pointer-events:none;box-sizing:border-box;}
+.u-authorize-tool button{position: relative; flex: 1;margin:0;padding:0;border:0;width:100%;height:100rpx;line-height:100rpx;font-size:32rpx;text-align:center;border-radius:0;-webkit-appearance:none;-webkit-text-size-adjust:100%;box-sizing:border-box;background:transparent;}
+.u-authorize-tool button:after{content:" ";position:absolute;top:0;left:0;width:200%;height:200%;border:0 #dddddd solid;border-right-width:1px;-webkit-transform:scale(.5);transform:scale(.5);-webkit-transform-origin:0 0;transform-origin:0 0;pointer-events:none;box-sizing:border-box;border-radius:0;}
+.u-authorize-tool button:last-child:after{ display: none; }
+.u-authorize-tool__cancel{color:#666;}
+.u-authorize-tool__define{color:#09bb07;}
+

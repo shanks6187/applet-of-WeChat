@@ -1,0 +1,12 @@
+/* pages/invitations_times/index.wxss */
+.container {
+	padding: 40rpx 30rpx;
+}
+
+.box {
+	margin: 0 0 30rpx;
+	padding: 30rpx;
+	background: #FFFFFF;
+	box-shadow: 0 4rpx 20rpx 5rpx rgba(183, 189, 202, 0.05);
+	border-radius: 20rpx;
+}

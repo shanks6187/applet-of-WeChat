@@ -1,0 +1,75 @@
+<!--pages/invitation_detail/index.wxml-->
+<wxs src="../../utils/common.wxs" module="util" />
+<view class="container">
+  <view class="head-box">
+    <image src="/static/icon/icon_head{{infos.user.avatar || 1}}.png" mode="aspectFill" class="head" />
+    <image src="/static/icon/icon_gender{{infos.user.gender == 0 ? 6 : infos.user.gender}}.png" mode="aspectFit" class="icon-gender" />
+  </view>
+  <view class="fs34 col-3 mb30 tc fwb">
+    {{infos.user.nickname || infos.user.username}}
+  </view>
+  <view wx:if="{{infos.user.interest_list.length > 0}}" class="flex-box flex-center mb50">
+    <view wx:for="{{infos.user.interest_list}}" wx:for-item="vo" class="label">{{vo.interest_name}}</view>
+  </view>
+
+  <view class="box1">
+    <view class="dining-room flex-box flex-align-start" wx:if="{{infos.restaurant}}" bindtap="openLocation" data-lat="{{infos.restaurant.lat}}" data-lng="{{infos.restaurant.lng}}">
+      <view class="flex-1 mr40 pr40">
+        <view class="fs30 col-3 mb10">{{infos.restaurant.restaurant_name}}</view>
+        <view class="fs28 col-6">{{infos.restaurant.restaurant_address}}</view>
+      </view>
+      <view class="tr">
+        <view class="fs26 mb30">{{util.distance_formatter(infos.distance)}}</view>
+        <image src="/static/icon/icon_go.png" mode="aspectFit" class="icon-go" />
+      </view>
+    </view>
+    <view class="flex-box fs30 ptb30">
+      <view class="col-5 flex-1">选择时间</view>
+      <view class="col-10">{{infos.appoint_date_text || ''}}</view>
+    </view>
+    <view class="flex-box flex-wrap flex-align-start">
+      <view wx:for="{{timesList}}" wx:for-item="vo" bindtap="chooseTime" data-time="{{vo}}" class="time-label {{choose_time == vo ? 'active' : ''}}">{{vo}}</view>
+    </view>
+  </view>
+
+  <view class="box2">
+    <view class="flex-box ptb30 mb10">
+      <view class="col-5 flex-1">希望对方</view>
+      <view class="col-10">{{infos.sex_text}}</view>
+    </view>
+
+
+    <view class="flex-box ptb30">
+      <view class="col-5 flex-1">目的</view>
+      <view class="col-10">{{infos.to_text}}</view>
+    </view>
+
+    <view class="flex-box ptb30">
+      <view class="col-5 flex-1">我要</view>
+      <view class="col-10">{{infos.want_text}}</view>
+    </view>
+
+    <view class="flex-box ptb30 pr">
+      <view class="col-5 flex-1">邀约定金</view>
+      <view class="col-orange">¥{{infos.pay_amount || 0}}</view>
+      <image bindtap="toggleTip" src="/static/icon/icon_tip.png" mode="aspectFit" class="icon-tip" />
+      <!--  -->
+      <view bindtap="toggleTip" class="tip-box" style="display: {{isShowTip ? 'block' : 'none'}}; filter: {{isShowTip ? 'drop-shadow(0 2rpx 10rpx rgba(0, 0, 0, 0.2))' : 'unset'}};">邀约定金，双方支付相同金额开启邀约。定金返还规则，双方均签到后，定金全额退还；若一方签到，邀约开始8小时后退还。取消规则，取消方没收定金，被取消方获得定金的{{money_tip.cancel_rate_user}}%。
+      </view>
+    </view>
+
+
+  </view>
+
+  <view class="flex-box mb70">
+    <!-- <button wx:if="{{show_share == 1}}" open-type="share" class="m-button">
+      <image src="/static/icon/icon_share.png" mode="aspectFit" class="icon-share" />
+    </button> -->
+    <view bindtap="appointOrder" class="g-btn1 flex-1">
+      确认邀约
+    </view>
+  </view>
+
+  <!-- showAuth -->
+  <u-authorize show="{{showAuth}}" is_getphone="true" bind:close="authClose" bind:confirm="authConfirm"></u-authorize>
+</view>

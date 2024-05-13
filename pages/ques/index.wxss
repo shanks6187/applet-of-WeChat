@@ -1,0 +1,11 @@
+/* pages/ques/index.wxss */
+.container{
+	padding: 30rpx;
+}
+.box {
+	margin: 0 0 30rpx;
+	padding: 30rpx;
+	background: #FFFFFF;
+	box-shadow: 0 8rpx 40rpx 0 rgba(0, 0, 0, 0.06);
+	border-radius: 20rpx;
+}

@@ -1,0 +1,59 @@
+/* pages/choose_restaurant/index.wxss */
+.page-head {
+  background-color: #fff;
+}
+
+.search {
+  width: 690rpx;
+  height: 80rpx;
+  background: #FFFFFF;
+  box-shadow: 0 4rpx 20rpx 0 rgba(183, 189, 202, 0.1);
+  border-radius: 40rpx;
+  border: 1px solid #EEEEEE;
+}
+
+.search image {
+  margin-right: 20rpx;
+  display: block;
+  width: 26rpx;
+  height: 26rpx;
+}
+
+.search input {
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #333333;
+}
+
+.mask {
+  width: 750rpx;
+  height: calc(100vh - 140rpx);
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.container {
+  padding-top: 140rpx;
+}
+
+.map {
+  width: 750rpx;
+  height: 444rpx;
+}
+
+.restaurant {
+  padding: 30rpx 0;
+}
+
+.restaurant .name {
+  font-size: 34rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #101010;
+  line-height: 44rpx;
+}
+
+.search-list{
+  max-height: 700rpx;
+  overflow-y: scroll;
+}

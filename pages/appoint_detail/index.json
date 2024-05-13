@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "u-popup":"/components/u-popup/index",
+    "u-changetime":"/components/u-changetime/index",
+    "u-cancel":"/components/u-cancel/index",
+    "u-selecttime":"/components/u-selecttime/index"
+  },
+  "navigationBarTitleText": "详情"
+}

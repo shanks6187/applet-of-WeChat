@@ -1,0 +1,31 @@
+/* pages/cash/index.wxss */
+.container {
+  padding: 90rpx 30rpx 200rpx!important;
+}
+
+.title {
+  margin: 0 0 60rpx;
+  font-size: 34rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #101010;
+  line-height: 34rpx;
+  text-align: center;
+}
+
+.input-wrap {
+  margin: 0 85rpx 130rpx;
+  padding-bottom: 30rpx;
+  border-bottom: 1px solid #86897D;
+}
+
+.input {
+  margin-left: 5rpx;
+  width: 170rpx;
+  height: 70rpx;
+  font-size: 60rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: bold;
+  color: #333;
+  line-height: 70rpx;
+}

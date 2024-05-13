@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "u-popup":"/components/u-popup/index"
+  },
+  "navigationBarTitleText": "基本信息",
+  "navigationBarBackgroundColor": "#FFFFFF"
+}

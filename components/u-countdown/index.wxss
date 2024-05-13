@@ -1,0 +1,27 @@
+/* components/u-countdown.wxss */
+.u-countdown {
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	padding: 2rpx 0;
+}
+
+.u-countdown__title {
+	margin-right: 20rpx;
+	font-size: 32rpx;
+}
+
+.u-countdown__splitor {
+	padding: 0 2rpx;
+	line-height: 34rpx;
+	font-size: 24rpx;
+	color: var(--normal);
+}
+
+.u-countdown__number {
+	text-align: center;
+	line-height: 34rpx;
+	font-size: 24rpx;
+	color: var(--normal);
+}

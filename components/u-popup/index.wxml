@@ -1,0 +1,12 @@
+<!--components/popup.wxml-->
+<view class="popup-wrap popup-wrap--{{type}} {{show?'popup-wrap_visible':''}} {{type=='bottom'&&safeArea?'u-popup--safe':''}} custom-class" style="--popup-margin:{{margin}}">
+  <u-icon wx:if="{{showClose}}" class="popup-close" type="image" name="close" bind:click="_popupClose"></u-icon>
+  <view wx:if="{{showTitle}}" class="popup-title title-class">
+    <view class="title">{{title}}</view>
+    <u-icon class="icon" type="image" name="close" bind:click="_popupClose"></u-icon>
+  </view>
+  <view class="popup-main main-class">
+    <slot></slot>
+  </view>
+</view>
+<view class="popup-mask {{show?'popup-mask_visible':''}}" style="--popup-margin:{{margin}}" bindtap="_popupClose"></view>

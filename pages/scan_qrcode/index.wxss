@@ -1,0 +1,4 @@
+/* pages/scan_qrcode/index.wxss */
+.container {
+  background: #FAFAFA;
+}

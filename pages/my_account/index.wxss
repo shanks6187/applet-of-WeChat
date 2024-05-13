@@ -1,0 +1,49 @@
+/* pages/my_account/index.wxss */
+.container {
+  background: #FAFAFA;
+}
+
+.account {
+  padding: 50rpx 50rpx 90rpx;
+  background: #EB7D4C;
+}
+
+.account .btn {
+  width: 140rpx;
+  height: 60rpx;
+  background: #FFFFFF;
+  border-radius: 30rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #333333;
+  line-height: 60rpx;
+  text-align: center;
+}
+
+.box {
+  margin: -40rpx 0 0;
+  padding: 40rpx 30rpx;
+  background: #FAFAFA;
+  border-radius: 40rpx 40rpx 20rpx 20rpx;
+}
+
+.box .title {
+  margin: 0 0 40rpx;
+  font-size: 34rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #303132;
+  line-height: 38rpx;
+}
+
+.box .record {
+  margin: 0 0 30rpx;
+  padding: 30rpx;
+  background: #FFFFFF;
+  box-shadow: 0 4rpx 20rpx 0 rgba(183, 189, 202, 0.1);
+  border-radius: 20rpx;
+}
+.box .col{
+  color: #86897D;
+}

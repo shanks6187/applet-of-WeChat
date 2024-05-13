@@ -1,0 +1,9 @@
+/* pages/detail/index.wxss */
+
+.detail-box {
+  position: relative;
+  padding: 50rpx 30rpx 150rpx;
+  background: #FFFFFF;
+  box-shadow: 0 4rpx 20rpx 5rpx rgba(183, 189, 202, 0.05);
+  border-radius: 60rpx 60rpx 0 0;
+}

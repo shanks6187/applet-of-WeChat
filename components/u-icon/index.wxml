@@ -1,0 +1,24 @@
+<wxs module="utils">
+    function isSrc(url) {
+        return url.indexOf('http') === 0 || url.indexOf('data:image') === 0 || url.indexOf('//') === 0;
+    }
+
+    module.exports.isSrc = isSrc;
+</wxs>
+<view
+        class="custom-class {{ classPrefix }} {{ type == 'image' ? 'u-icon--image' : classPrefix + '-' + name }}"
+        style="{{ color ? 'color: ' + color + ';' : '' }}{{ size ? 'font-size: ' + size + ';' : '' }}{{ customStyle }}"
+        bind:tap="onClick"
+>
+    <image
+            class="image"
+            wx:if="{{ type == 'image' }}"
+            src="{{ utils.isSrc(name) ? name : '../../static/icon/u-icon-' + name + '.png' }}"
+    />
+    <view
+            wx:if="{{ info !== null }}"
+            class="u-icon--info"
+    >
+        {{ info }}
+    </view>
+</view>

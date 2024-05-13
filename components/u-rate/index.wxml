@@ -1,0 +1,33 @@
+<!--components/u-rate/index.wxml-->
+<view
+  class="u-rate custom-class"
+  bind:touchmove="onTouchMove"
+>
+  <view
+    class="u-rate__item"
+    wx:for="{{ count }}"
+    wx:key="index"
+    style="font-size: {{ size }};margin-right: {{ index !== count - 1 ? gutter : '' }}"
+  >
+    <u-icon
+      class="u-rate__icon"
+      custom-class="icon-class"
+      type="image"
+      name="{{ index + 1 <= value ? icon : voidIcon }}"
+      data-score="{{ index }}"
+      color="{{ disabled ? disabledColor : index + 1 <= value ? color : voidColor }}"
+      bind:click="onSelect"
+    />
+
+    <u-icon
+      wx:if="{{ allowHalf }}"
+      class="u-rate__icon--half"
+      custom-class="icon-class"
+      type="image"
+      name="{{ index + 0.5 <= value ? icon : voidIcon }}"
+      data-score="{{ index - 0.5 }}"
+      color="{{ disabled ? disabledColor : index + 0.5 <= value ? color : voidColor }}"
+      bind:click="onSelect"
+    />
+  </view>
+</view>

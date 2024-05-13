@@ -1,0 +1,154 @@
+/* pages/invite/index.wxss */
+.container {
+  padding: 70rpx 60rpx 60rpx;
+}
+
+.title {
+  position: relative;
+  margin: 0 0 30rpx;
+  font-size: 34rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #101010;
+  line-height: 38rpx;
+}
+
+.box {
+  margin: 0 0 70rpx;
+  padding: 0 30rpx;
+  height: 90rpx;
+  border-radius: 30rpx;
+  border: 1px solid #999999;
+}
+
+.box .icon-addr {
+  display: block;
+  width: 24rpx;
+  height: 30rpx;
+}
+
+.gender {
+  width: 190rpx;
+  height: 70rpx;
+  background: #F6F7F9;
+  border-radius: 35rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #333333;
+  line-height: 30rpx;
+}
+
+.gender .icon-gender {
+  margin-right: 20rpx;
+  display: block;
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.gender.active {
+  background: #9EDEDE;
+}
+
+.option-wrap {
+  width: 300rpx;
+  height: 90rpx;
+  background: #F4F5F7;
+  border-radius: 30rpx;
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #333333;
+  line-height: 90rpx;
+  text-align: center;
+}
+
+.option-wrap .option {
+  width: 150rpx;
+  height: 90rpx;
+  border-radius: 30rpx;
+  background: #F4F5F7;
+}
+
+.option-wrap .option.active {
+  background: #9EDEDE;
+}
+
+.icon-tip {
+  padding: 5rpx 10rpx 5rpx 20rpx;
+  display: block;
+  width: 60rpx;
+  height: 40rpx;
+}
+
+.tip-box {
+  position: absolute;
+  left: 50%;
+  top: 64rpx;
+  /* transform: translateX(-50%); */
+  transform: translate3d(-50%, 0, 0);
+  padding: 30rpx;
+  width: 630rpx;
+  background: #F5F9FF;
+  border-radius: 20rpx;
+  filter: drop-shadow(0 2rpx 10rpx rgba(0, 0, 0, 0.2));
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #333333;
+  line-height: 42rpx;
+  text-align: justify;
+}
+
+.tip-box::after {
+  position: absolute;
+  right: 10rpx;
+  top: -20rpx;
+  content: '';
+  border-left: 28rpx solid transparent;
+  border-right: 28rpx solid transparent;
+  border-bottom: 22rpx solid #F5F9FF;
+}
+
+.deposit {
+  margin: 0 30rpx 30rpx 0;
+  width: 190rpx;
+  height: 160rpx;
+  border-radius: 30rpx;
+  border: 4rpx solid #F3F4F5;
+  line-height: 156rpx;
+  text-align: center;
+  font-size: 52rpx;
+  font-family: Poppins-SemiBold, Poppins;
+  font-weight: bold;
+  color: #29273B;
+}
+
+.deposit.active {
+  border: 4rpx solid #9EDEDE;
+  color: #EB7D4C;
+}
+
+.deposit:nth-of-type(3n) {
+  margin: 0 0 30rpx;
+}
+
+.icon-check {
+  margin-right: 15rpx;
+  display: block;
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+}
+
+.column1 {
+  color: red;
+}
+
+.icon-go {
+  margin-left: 100rpx;
+  display: block;
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 10rpx;
+}

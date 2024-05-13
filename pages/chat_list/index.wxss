@@ -1,0 +1,32 @@
+/* pages/chat_list/index.wxss */
+.container {
+  background: #FAFAFA;
+}
+
+.m-button{
+  position: fixed;
+  right: 30rpx;
+  bottom: 268rpx;
+  width: 100rpx;
+  height: 100rpx;
+}
+.m-button .icon-kefu{
+  display: block;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+
+.dot{
+  position: relative;
+}
+.dot::after{
+  content: '';
+  position: absolute;
+  right: -8rpx;
+  top: -8rpx;
+  background: var(--red);
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+}

@@ -1,0 +1,9 @@
+<!--pages/evaluation_success/index.wxml-->
+<view class="container">
+  <image src="/static/icon/icon_success.png" mode="aspectFit" class="icon_success" />
+  <view class="fs34 col-10 tc" style="margin-bottom: 200rpx;">评价成功</view>
+  <view class="flex-box flex-between">
+    <navigator class="btn1" open-type="navigateBack" delta="1" hover-class="none">返回</navigator>
+    <navigator class="btn2" open-type="switchTab" url="../partner/index" hover-class="none">去找搭子</navigator>
+  </view>
+</view>

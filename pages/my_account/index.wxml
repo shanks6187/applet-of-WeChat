@@ -1,0 +1,39 @@
+<!--pages/my_account/index.wxml-->
+<view class="container">
+  <view class="account flex-box flex-align-start">
+    <view class="flex-1 col-f">
+      <view class="mb20">
+        <text class="fs24">¥</text>
+        <text class="fs44">{{money}}</text>
+      </view>
+      <view  class="fs28">总金额</view>
+    </view>
+    <view bindtap="add_withdraw" class="btn">提现</view>
+  </view>
+  <view class="box">
+    <view class="title">账户明细</view>
+    <block wx:if="{{list.length > 0}}">
+
+      <view class="record flex-box" wx:for="{{list}}" wx:for-item="vo">
+        <view class="flex-1" wx:if="{{vo.account_type == 2}}">
+          <view class="fs32 col-10">{{vo.title || '确认提现'}}</view>
+        </view>
+        <view class="flex-1" wx:else>
+          <view class="col fs28 pb20">订单号 {{vo.order_no || ''}}</view>
+          <view class="fs32 col-10">{{vo.title}}</view>
+        </view>
+        <view class="tr">
+          <view class="col fs26 pb20">{{vo.createtime_text}}</view>
+          <view class="fs34 col-orange">{{vo.amount_type == 1 ? '+' : '-'}} ¥{{vo.amount}}</view>
+        </view>
+      </view>
+      
+    </block>
+
+    <block wx:else>
+      <view style="text-align: center; line-height: 300rpx;">暂无记录</view>
+    </block>
+
+
+  </view>
+</view>

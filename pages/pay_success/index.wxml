@@ -1,0 +1,7 @@
+<!--pages/pay_success/index.wxml-->
+<view class="container">
+  <image src="/static/icon/icon_success1.png" mode="aspectFit" class="icon_success" />
+  <view class="fs34 col-10 tc" style="margin-bottom: 200rpx;">支付成功</view>
+  <navigator wx:if="{{is_type == 1}}" class="btn1" url="../appoint_detail/index?id={{order_id}}&is_back=mine" hover-class="none">查看订单</navigator>
+  <navigator wx:else class="btn1" url="../appoint_detail/index?order_id={{order_id}}&is_back=mine" hover-class="none">查看订单</navigator>
+</view>

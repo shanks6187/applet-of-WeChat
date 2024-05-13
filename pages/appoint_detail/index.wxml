@@ -1,0 +1,211 @@
+<!--pages/appoint_detail/index.wxml-->
+<wxs src="../../utils/common.wxs" module="util" />
+<block wx:if="{{order_id == 0}}">
+
+  <view class="container">
+
+    <view class="head-box">
+      <image src="/static/icon/icon_head{{info.user.avatar || 1}}.png" mode="aspectFill" class="head" />
+      <image src="/static/icon/icon_gender{{info.user.gender == 0 ? 6 : info.user.gender}}.png" mode="aspectFit" class="icon-gender" />
+    </view>
+
+    <view class="fs34 col-3 mb30 tc fwb">
+      {{info.user.nickname || info.user.username}}
+    </view>
+    <view wx:if="{{info.user.interest_list.length > 0}}" class="flex-box flex-center mb50">
+      <view wx:for="{{info.user.interest_list}}" wx:for-item="vo" class="label">{{vo.interest_name}}</view>
+    </view>
+
+    <view class="box1" bindtap="openLocation" data-lat="{{info.restaurant.lat}}" data-lng="{{info.restaurant.lng}}">
+      <view class="dining-room flex-box flex-align-start">
+        <view class="flex-1 mr40 pr40">
+          <view class="fs30 col-3 mb10">{{info.restaurant.restaurant_name}}</view>
+          <view class="fs28 col-6">{{info.restaurant.restaurant_address}}</view>
+        </view>
+        <view class="tr">
+          <view class="fs26 mb30">{{util.distance_formatter(info.distance)}}</view>
+          <image src="/static/icon/icon_go.png" mode="aspectFit" class="icon-go" />
+        </view>
+      </view>
+      <view class="flex-box fs30 ptb30">
+        <view class="col-5 flex-1">时间</view>
+        <view class="col-10">{{info.appoint_date_text}} | {{info.times}}</view>
+      </view>
+    </view>
+
+    <view class="box2">
+      <view class="flex-box ptb30 mb10">
+        <view class="col-5 flex-1">希望对方</view>
+        <view class="col-10">{{info.sex_text || ''}}</view>
+      </view>
+
+
+      <view class="flex-box ptb30">
+        <view class="col-5 flex-1">目的</view>
+        <view class="col-10">{{info.to_text || ''}}</view>
+      </view>
+
+      <view class="flex-box ptb30">
+        <view class="col-5 flex-1">我要</view>
+        <view class="col-10">{{info.want_text || ''}}</view>
+      </view>
+
+      <view class="flex-box ptb30">
+        <view class="col-5 flex-1">邀约金额</view>
+        <view class="col-orange">¥{{info.pay_amount}}</view>
+        <image bindtap="toggleTip" src="/static/icon/icon_tip.png" mode="aspectFit" class="icon-tip" />
+      </view>
+
+      <view bindtap="toggleTip" class="tip-box" wx:if="{{isShowTip}}" style="display: {{isShowTip ? 'block' : 'none'}};">邀约定金，双方支付相同金额开启邀约。定金返还规则，双方均签到后，定金全额退还；若一方签到，邀约开始8小时后退还。取消规则，取消方没收定金，被取消方获得定金的{{money_tip.cancel_rate_user}}%
+      </view>
+    </view>
+
+    <view class="fs30 col-9 tc mb30">邀约单号：{{info.order_no || ''}}</view>
+
+    <view wx:if="{{info.status == 2}}" class="flex-box flex-center">
+      <button wx:if="{{info.is_plantfrom == 1}}" open-type="share" class="m-button">
+        <image src="/static/icon/icon_share.png" mode="aspectFit" class="icon-share" />
+      </button>
+      <view wx:if="{{info.is_plantfrom == 1}}" class="foot-btn1" bind:tap="show_change_time">修改时间</view>
+      <view class="foot-btn1" bind:tap="togglePop1">取消订单</view>
+    </view>
+
+
+
+    <u-cancel show="{{pop1}}" bind:close="togglePop1" is_sure="{{false}}" appoint_id="{{appoint_id}}" order_id="{{order_id}}" bind:close="togglePop1" bind:confirm="cancelConfirm"></u-cancel>
+
+    <u-selecttime show="{{show_time}}" bind:close="show_change_time" appoint_id="{{appoint_id}}" bind:confirm="appoint_update_time"></u-selecttime>
+
+
+    <!-- 调查问卷 -->
+    <u-popup show="{{pop3}}" bind:close="togglePop3">
+      <view class="pop1">
+        <image bind:tap="togglePop3" src="/static/icon/icon_close1.png" mode="aspectFit" class="icon-close" />
+        <view class="flex-box flex-center mb50">
+          <image src="/static/icon/icon_mood1.png" mode="aspectFit" style="width: 30rpx;height: 30rpx;" />
+          <view class="fs30 col-6 ml10">提示</view>
+        </view>
+        <view class="fs34 col-10 mb60 fwb">
+          <view>愿意帮我做一份</view>
+          <view>小程序的调查问卷吗</view>
+        </view>
+        <view class="flex-box flex-between">
+          <view class="btn1" bind:tap="togglePop3">抱歉没空</view>
+          <view class="btn2">点击跳转</view>
+        </view>
+      </view>
+    </u-popup>
+
+  </view>
+</block>
+
+<block wx:else>
+
+
+  <view class="container">
+    <view class="head-box">
+      <image src="/static/icon/icon_head{{info.appoint_user.avatar || 1}}.png" mode="aspectFill" class="head" />
+      <image src="/static/icon/icon_gender{{info.user.gender == 0 ? 6 : info.user.gender}}.png" mode="aspectFit" class="icon-gender" />
+    </view>
+
+    <view class="fs34 col-3 mb30 tc fwb">
+      {{info.appoint_user.nickname || info.appoint_user.username}}
+    </view>
+    <view wx:if="{{info.appoint_user.interest_list.length > 0}}" class="flex-box flex-center mb50">
+      <view wx:for="{{info.appoint_user.interest_list}}" wx:for-item="vo" class="label">{{vo.interest_name}}</view>
+    </view>
+
+
+    <view class="box1" bindtap="openLocation" data-lat="{{info.restaurant.lat}}" data-lng="{{info.restaurant.lng}}">
+      <view class="dining-room flex-box flex-align-start">
+        <view class="flex-1 mr40 pr40">
+          <view class="fs30 col-3 mb10">{{info.restaurant.restaurant_name}}</view>
+          <view class="fs28 col-6">{{info.restaurant.restaurant_address}}</view>
+        </view>
+        <view class="tr">
+          <view class="fs26 mb30">{{util.distance_formatter(info.distance)}}</view>
+          <image src="/static/icon/icon_go.png" mode="aspectFit" class="icon-go" />
+        </view>
+      </view>
+      <view class="flex-box fs30 ptb30">
+        <view class="col-5 flex-1">时间</view>
+        <view class="col-10">{{info.appoint_time_text}}</view>
+      </view>
+    </view>
+
+    <view class="box2">
+      <view class="flex-box ptb30 mb10">
+        <view class="col-5 flex-1">希望对方</view>
+        <view class="col-10">{{info.appoint.sex_text || ''}}</view>
+      </view>
+
+
+      <view class="flex-box ptb30">
+        <view class="col-5 flex-1">目的</view>
+        <view class="col-10">{{info.appoint.to_text || ''}}</view>
+      </view>
+
+      <view class="flex-box ptb30">
+        <view class="col-5 flex-1">我要</view>
+        <view class="col-10">{{info.appoint.want_text || ''}}</view>
+      </view>
+
+      <view class="flex-box ptb30">
+        <view class="col-5 flex-1">邀约金额</view>
+        <view class="col-orange">¥{{info.pay_amount || ''}}</view>
+        <image bindtap="toggleTip" src="/static/icon/icon_tip.png" mode="aspectFit" class="icon-tip" />
+      </view>
+
+      <view bindtap="toggleTip" class="tip-box" wx:if="{{isShowTip}}" style="display: {{isShowTip ? 'block' : 'none'}};">邀约定金，双方支付相同金额开启邀约。定金返还规则，双方均签到后，定金全额退还；若一方签到，邀约开始8小时后退还。取消规则，取消方没收定金，被取消方获得定金的{{money_tip.cancel_rate_user}}%
+      </view>
+    </view>
+
+    <view class="fs30 col-9 tc mb30">邀约单号：{{info.order_no || ''}}</view>
+
+    <block wx:if="{{info.is_own == 1}}">
+      <view wx:if="{{info.appoint.status == 3}}" class="flex-box flex-center">
+        <image bindtap="online_chat" data-appointid="{{info.appoint_id}}" data-orderid="{{info.id}}" src="/static/icon/icon_message1.png" mode="aspectFit" class="icon-message" />
+        <view bindtap="sure_appoint" data-id="{{info.id}}" class="g-btn1" style="margin:0; width: 490rpx!important;">确认赴约</view>
+      </view>
+
+      <view wx:if="{{info.appoint.status == 4}}" bindtap="to_comment" data-id="{{info.id}}" class="g-btn1">写评价</view>
+      <view wx:if="{{info.appoint.status == 5}}" bindtap="to_comment_info" data-id="{{info.id}}" class="g-btn1">查看评价</view>
+
+    </block>
+
+    <block wx:else>
+      <view wx:if="{{info.status == 3}}" class="flex-box flex-center">
+        <image bindtap="online_chat" data-appointid="{{info.appoint_id}}" data-orderid="{{info.id}}" src="/static/icon/icon_message1.png" mode="aspectFit" class="icon-message" />
+        <view bindtap="sure_appoint" data-id="{{info.id}}" class="g-btn1" style="margin:0; width: 490rpx!important;">确认赴约</view>
+      </view>
+
+      <view wx:if="{{info.status == 4}}" bindtap="to_comment" data-id="{{info.id}}" class="g-btn1">写评价</view>
+      <view wx:if="{{info.status == 5}}" bindtap="to_comment_info" data-id="{{info.id}}" class="g-btn1">查看评价</view>
+
+    </block>
+
+
+
+
+    <!-- 调查问卷 -->
+    <!-- <u-popup show="{{pop3}}" bind:close="togglePop3">
+      <view class="pop1">
+        <image bind:tap="togglePop3" src="/static/icon/icon_close1.png" mode="aspectFit" class="icon-close" />
+        <view class="flex-box flex-center mb50">
+          <image src="/static/icon/icon_mood1.png" mode="aspectFit" style="width: 30rpx;height: 30rpx;" />
+          <view class="fs30 col-6 ml10">提示</view>
+        </view>
+        <view class="fs34 col-10 mb60 fwb">
+          <view>愿意帮我做一份</view>
+          <view>小程序的调查问卷吗</view>
+        </view>
+        <view class="flex-box flex-between">
+          <view class="btn1" bind:tap="togglePop3">抱歉没空</view>
+          <view class="btn2">点击跳转</view>
+        </view>
+      </view>
+    </u-popup> -->
+
+  </view>
+
+</block>

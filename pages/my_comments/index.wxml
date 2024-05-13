@@ -1,0 +1,50 @@
+<!--pages/my_comments/index.wxml-->
+<wxs src="../../utils/common.wxs" module="util" />
+<view class="container p30">
+  <block wx:if="{{list.length > 0}}">
+    <view class="comment" wx:for="{{list}}" wx:for-item="vo">
+      <navigator wx:if="{{vo.appoint.appoint_type == 2}}" class="flex-box ptb30 m-hairline--bottom" url="../task_detail/index?id={{vo.multi.appoint_id}}" hover-class="none">
+        <view class="flex-1 fs32 col-3">{{vo.multi.multi_appoint_name || ''}}</view>
+        <view class="col-orange fs26 m-arrow-right">活动详情</view>
+      </navigator>
+      <navigator wx:else class="flex-box ptb30 m-hairline--bottom" url="../restaurant_detail/index?id={{vo.restaurant_id}}" hover-class="none">
+        <view class="flex-1 fs32 col-3">{{vo.restaurant.restaurant_name || ''}}</view>
+        <view class="col-orange fs26 m-arrow-right">美食详情</view>
+      </navigator>
+      <view wx:if="{{vo.appoint.appoint_type == 2}}" class="g-card flex-box pb20 m-hairline--bottom flex-align-start" style="padding: 30rpx 0 20rpx;">
+        <view class="head">
+          <image src="/static/icon/icon_head{{vo.user.avatar || 1}}.png" mode="aspectFill" class="img-head" />
+          <image src="/static/icon/icon_gender{{vo.user.gender == 0 ? 6 : vo.user.gender}}.png" mode="aspectFill" class="icon-gender" />
+        </view>
+        <view class="flex-1">
+          <view class="name">{{vo.user.nickname || vo.user.username}}</view>
+          <view class="fs26 col-3 mt15">{{vo.multi.appoint_time_str}}</view>
+        </view>
+      </view>
+      <view wx:else class="g-card flex-box pb20 m-hairline--bottom flex-align-start" style="padding: 30rpx 0 20rpx;">
+        <view class="head">
+          <image src="/static/icon/icon_head{{vo.appoint_user.avatar || 1}}.png" mode="aspectFill" class="img-head" />
+          <image src="/static/icon/icon_gender{{vo.appoint_user.gender == 0 ? 6 : vo.appoint_user.gender}}.png" mode="aspectFill" class="icon-gender" />
+        </view>
+        <view class="flex-1">
+          <view class="name">{{vo.appoint_user.nickname || vo.appoint_user.username}}</view>
+          <view class="fs26 col-3 mt15">{{vo.appoint.appoint_date_text}}｜{{vo.appoint.times}} </view>
+        </view>
+      </view>
+      <block wx:for="{{vo.item_list}}" wx:for-item="vv" wx:for-index="keys">
+        <view class="fs30 col-3 mt30">{{keys + 1}}.{{vv.title || ''}}</view>
+        <view class="fs28 col-6 mt20">{{vv.answer || ''}}</view>
+      </block>
+
+
+      <view wx:if="{{vo.image_list.length > 0}}" class="img-wrap flex-box flex-wrap">
+        <image wx:for="{{vo.image_list}}" wx:for-item="vvv" src="{{util.show_image(vvv)}}" bindtap="show_image" data-url="{{util.show_image(vvv)}}" mode="aspectFill" class="img" />
+      </view>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view style="text-align: center; line-height: 300rpx;">暂无评价</view>
+  </block>
+
+</view>

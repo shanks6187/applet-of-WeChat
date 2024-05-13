@@ -1,0 +1,97 @@
+<!--pages/chat_list/index.wxml-->
+<wxs src="../../utils/common.wxs" module="util" />
+<view class="container p30">
+  <block wx:if="{{list.length > 0}}">
+    <view class="g-card mb30" wx:for="{{list}}" wx:for-item="vo">
+      <view bindtap="detail" data-id="{{vo.appoint_id}}" data-orderid="{{vo.id}}" class="flex-box pb20 m-hairline--bottom flex-align-start">
+        <view class="head">
+          <image src="/static/icon/icon_head{{vo.is_own == 1 ? (vo.user.avatar || 1) : (vo.appoint_user.avatar || 1)}}.png" mode="aspectFill" class="img-head" />
+          <block wx:if="{{vo.is_own == 1}}">
+            <image src="/static/icon/icon_gender{{vo.user.gender == 0 ? 6 : vo.user.gender}}.png" mode="aspectFill" class="icon-gender" />
+          </block>
+          <block wx:else>
+            <image src="/static/icon/icon_gender{{vo.appoint_user.gender == 0 ? 6 : vo.appoint_user.gender}}.png" mode="aspectFill" class="icon-gender" />
+          </block>
+        </view>
+        <view class="flex-1">
+          <view class="name" wx:if="{{vo.is_own == 1}}">{{vo.user.nickname || vo.user.username}}</view>
+          <view class="name" wx:else>{{vo.appoint_user.nickname || vo.appoint_user.username}}</view>
+          <view class="fs26 col-3 mt15">{{vo.appoint_time_text}}</view>
+          <view wx:if="{{vo.status != 6}}" class="flex-box mt15">
+            <image src="/static/icon/icon_time1.png" mode="aspectFit" class="icon-time" />
+            <view class="ml20 col-normal fs26">
+              <u-countdown end-time="{{vo.appoint_time_text}}" showColon="{{true}}" showSecond="{{true}}"></u-countdown>
+            </view>
+          </view>
+        </view>
+        <!-- 红点 dot -->
+        <view class="{{vo.message_count > 0 ? 'dot' : ''}}" style="align-self: center;">
+          <image src="/static/icon/icon_message.png" mode="aspectFit" class="icon-message" />
+        </view>
+
+      </view>
+      <view class="pt20" wx:if="{{vo.restaurant}}" bindtap="openLocation" data-lat="{{vo.restaurant.lat}}" data-lng="{{vo.restaurant.lng}}">
+        <view class="flex-box mb20">
+          <view class="flex-1 fs30 col-3">{{vo.restaurant.restaurant_name}}</view>
+          <view class="fs26">{{util.distance_formatter(vo.distance)}}</view>
+        </view>
+        <view class="flex-box flex-align-end">
+          <view class="flex-1 fs28 col-6" style="margin-right: 156rpx;">{{vo.restaurant.restaurant_address}}</view>
+          <image src="/static/icon/icon_go.png" mode="aspectFit" class="icon-go" />
+        </view>
+      </view>
+      <block wx:if="{{vo.is_own == 1}}">
+        <view class="pt30 flex-box flex-end">
+
+          <view wx:if="{{vo.appoint.status == 3}}" class="btn btn2 " bind:tap="toggleCancel" data-appointid="{{vo.appoint_id}}" data-orderid="{{vo.id}}" data-sure="{{true}}">取消订单</view>
+
+          <view wx:if="{{vo.is_change_date && vo.appoint.status == 3}}" class="btn btn2 ml30" bindtap="show_time" data-params="{{vo}}">修改时间</view>
+
+          <view wx:if="{{vo.appoint.status == 3}}" class="btn btn1 ml30" bindtap="sure_appoint" data-id="{{vo.id}}">确认赴约</view>
+
+
+
+          <view class="btn btn1 ml30" bindtap="to_comment" wx:if="{{vo.appoint.status == 4}}" data-id="{{vo.id}}">写评价</view>
+
+          <view class="btn btn1 ml30" bindtap="to_comment_info" wx:if="{{vo.appoint.status == 5}}" data-id="{{vo.id}}">查看评价</view>
+
+        </view>
+      </block>
+
+      <block wx:else>
+        <view class="pt30 flex-box flex-end">
+
+          <view wx:if="{{vo.status == 3}}" class="btn btn2 " bind:tap="toggleCancel" data-appointid="0" data-orderid="{{vo.id}}" data-sure="{{true}}">取消订单</view>
+
+          <view class="btn btn2 ml30" bindtap="show_time" wx:if="{{vo.is_change_date && vo.status == 3}}" data-params="{{vo}}">修改时间</view>
+
+          <view wx:if="{{vo.status == 3}}" class="btn btn1 ml30" bindtap="sure_appoint" data-id="{{vo.id}}">确认赴约</view>
+
+          <view class="btn btn1 ml30" bindtap="to_comment" wx:if="{{vo.status == 4}}" data-id="{{vo.id}}">写评价</view>
+
+          <view class="btn btn1 ml30" bindtap="to_comment_info" wx:if="{{vo.status == 5}}" data-id="{{vo.id}}">查看评价</view>
+
+        </view>
+      </block>
+
+    </view>
+  </block>
+  <block wx:else>
+    <view style="text-align: center; line-height: 300rpx;">暂无记录</view>
+  </block>
+
+
+  <button open-type="contact" class="m-button">
+    <image src="/static/icon/icon_kefu.png" mode="aspectFit" class="icon-kefu" />
+  </button>
+
+  <!-- showAuth -->
+  <u-authorize show="{{showAuth}}" is_getphone="true" bind:close="authClose" bind:confirm="authConfirm"></u-authorize>
+
+  <!-- 修改时间 -->
+  <u-changetime show="{{show_time}}" timeList="{{timesList}}" appoint_id="{{appoint_id}}" order_id="{{order_id}}" bind:close="show_change_time" bind:confirm="show_com_change_time"></u-changetime>
+
+  <!-- 取消订单 -->
+  <u-cancel show="{{show_cancel}}" bind:close="toggleCancel" is_sure="{{is_cancel_return}}" appoint_id="{{appoint_id}}" order_id="{{order_id}}" bind:close="toggleCancel" bind:confirm="cancelConfirm"></u-cancel>
+
+</view>

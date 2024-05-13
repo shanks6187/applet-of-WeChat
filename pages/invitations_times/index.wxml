@@ -1,0 +1,22 @@
+<!--pages/invitations_times/index.wxml-->
+<view class="container bg-gray">
+  <view class="fs32 col-orange mb40">邀约次数剩余{{appoint_num}}次</view>
+
+  <block wx:if="{{list.length > 0}}">
+    <view class="box" wx:for="{{list}}" wx:for-item="vo">
+      <view class="flex-box fs26 mb25">
+        <view class="col-5 flex-1">订单号 {{vo.order_no}}</view>
+        <view class="col-a">{{vo.createtime_text}}</view>
+      </view>
+      <view class="flex-box">
+        <view class="fs30 col-10 flex-1">{{vo.title || ''}}</view>
+        <view class="fs34 {{vo.num_type == 1 ? 'col-orange' : ''}}">{{vo.num_type == 1 ? '+' : '-'}}{{vo.num}}</view>
+      </view>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view style="text-align: center; line-height: 300rpx;">暂无记录</view>
+  </block>
+
+</view>

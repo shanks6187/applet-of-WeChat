@@ -1,0 +1,97 @@
+/* pages/online_chat/index.wxss */
+.container {
+  padding: 30rpx 30rpx 200rpx!important;
+  background: #FAFAFA;
+  overflow-y: auto;
+  min-height: auto;
+}
+
+.time {
+  margin: 0 0 30rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #AAAAAA;
+  line-height: 28rpx;
+  text-align: center;
+}
+
+.icon-head {
+  display: block;
+  width: 82rpx;
+  height: 82rpx;
+  border-radius: 50%;
+}
+
+.you {
+  padding: 25rpx 30rpx;
+  max-width: 545rpx;
+  background: #FFFFFF;
+  font-size: 32rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #101010;
+  line-height: 45rpx;
+  border-radius: 20rpx;
+}
+
+.me {
+  padding: 25rpx 30rpx;
+  max-width: 545rpx;
+  background: rgba(123, 223, 217, 0.33);
+  font-size: 32rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #101010;
+  line-height: 45rpx;
+  border-radius: 20rpx;
+}
+
+.change {
+  margin: 0 auto 30rpx;
+  padding: 30rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+}
+
+.change .btn1 {
+  width: 300rpx;
+  height: 85rpx;
+  border-radius: 10rpx;
+  border: 1px solid #999999;
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #333333;
+  line-height: 85rpx;
+}
+
+.change .btn2 {
+  width: 300rpx;
+  height: 85rpx;
+  background: #EB7D4C;
+  border-radius: 10rpx;
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 85rpx;
+}
+
+.page-foot {
+  padding: 40rpx 30rpx;
+  background-color: #fff;
+}
+
+.page-foot .input {
+  padding: 0 30rpx;
+  width: 690rpx;
+  height: 90rpx;
+  background: #EEEEEE;
+  border-radius: 45rpx;
+  font-size: 32rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #333;
+  line-height: 45rpx;
+}

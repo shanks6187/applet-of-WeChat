@@ -1,0 +1,146 @@
+/* pages/invitation_detail/index.wxss */
+.container {
+  padding: 40rpx 30rpx 30rpx;
+  background: #FAFAFA;
+}
+
+.head-box {
+  position: relative;
+  margin: 0 auto 30rpx;
+  width: 150rpx;
+  height: 150rpx;
+}
+
+.head-box .icon-gender {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+}
+
+.head {
+  display: block;
+  width: 150rpx;
+  height: 150rpx;
+  background: #3873B9;
+  border-radius: 50%;
+}
+
+.label {
+  margin: 0 10rpx;
+  width: 158rpx;
+  height: 65rpx;
+  background: #E6E7EA;
+  border-radius: 33rpx;
+  text-align: center;
+  font-size: 26rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #333333;
+  line-height: 65rpx;
+}
+
+.box1 {
+  margin: 0 0 30rpx;
+  padding: 50rpx 30rpx 20rpx;
+  background: #FFFFFF;
+  border-radius: 60rpx;
+}
+
+.box1 .dining-room {
+  padding: 30rpx 30rpx 20rpx;
+  margin: 0 0 40rpx;
+  background: rgba(255, 140, 54, 0.1);
+  border-radius: 30rpx;
+}
+
+.box1 .icon-go {
+  margin: 0 0 0 auto;
+  display: block;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.box2 {
+  position: relative;
+  padding: 0 30rpx 1rpx;
+  margin: 0 0 70rpx;
+  background: #FFFFFF;
+  border-radius: 60rpx;
+  font-size: 30rpx;
+}
+
+.box2 .icon-tip {
+  padding: 5rpx 10rpx 5rpx 20rpx;
+  display: block;
+  width: 60rpx;
+  height: 40rpx;
+}
+
+
+.tip-box {
+  position: absolute;
+  left: 50%;
+  top:98rpx;
+  transform: translate3d(-50%, 0, 0);
+  padding: 30rpx;
+  width: 630rpx;
+  background: #F5F9FF;
+  border-radius: 20rpx;
+  filter: drop-shadow(0 2rpx 10rpx rgba(0, 0, 0, 0.2));
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #333333;
+  line-height: 42rpx;
+  text-align: justify;
+}
+
+.tip-box::after {
+  position: absolute;
+  right: 10rpx;
+  top: -20rpx;
+  content: '';
+  border-left: 28rpx solid transparent;
+  border-right: 28rpx solid transparent;
+  border-bottom: 22rpx solid #F5F9FF;
+}
+
+
+.time-label {
+  margin: 0 30rpx 30rpx 0;
+  width: 190rpx;
+  height: 65rpx;
+  background: #F6F7F9;
+  border-radius: 33rpx;
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #333333;
+  line-height: 65rpx;
+  text-align: center;
+}
+
+.time-label:nth-of-type(3n) {
+  margin: 0 0 30rpx;
+}
+
+.time-label.active {
+  background: #EB7D4C;
+  color: #FFFFFF;
+}
+
+
+.m-button {
+  margin: 0 30rpx 0 0 !important;
+  width: 110rpx !important;
+  height: 110rpx;
+}
+
+.m-button .icon-share {
+  display: block;
+  width: 110rpx;
+  height: 110rpx;
+}

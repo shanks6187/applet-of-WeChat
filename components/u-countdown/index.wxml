@@ -1,0 +1,12 @@
+<!--components/u-countdown.wxml-->
+<view class="u-countdown my-class">
+	<view wx:if="{{title}}" class="u-countdown__title">{{title}}</view>
+	<view wx:if="{{showDay && d>0}}" class="u-countdown__number">{{d}}</view>
+	<view wx:if="{{showDay && d>0}}" class="u-countdown__splitor">天</view>
+	<view class="u-countdown__number">{{h}}</view>
+	<view class="u-countdown__splitor">{{showColon ? ':' : '时'}}</view>
+	<view class="u-countdown__number">{{i}}</view>
+	<view class="u-countdown__splitor">{{showColon ? ':' : '分'}}</view>
+	<view wx:if="{{showSecond}}" class="u-countdown__number">{{s}}</view>
+	<view wx:if="{{showSecond&&!showColon}}" class="u-countdown__splitor">秒</view>
+</view>

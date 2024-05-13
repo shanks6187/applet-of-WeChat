@@ -1,0 +1,19 @@
+<!--components/u-authorize/index.wxml-->
+      <!-- <view class="u-authorize-body__title">微信授权成功</view> -->
+
+<u-popup show="{{show}}" main-class="u-authorize">
+  <view class="u-authorize-card" >
+  
+    <view class="u-authorize-title">微信授权</view>
+    <view class="u-authorize-body">
+      <image class="u-authorize-body__icon" src="./icon/icon_contact.png" mode="aspectFit"></image>
+      <view wx:if="{{is_getphone}}" class="u-authorize-body__info">授权绑定您的手机号码</view>
+      <view wx:else class="u-authorize-body__info">授权用户信息</view>
+    </view>
+    <view class="u-authorize-tool">
+      <button class="u-authorize-tool__cancel" bind:tap="onCancel">拒绝</button>
+      <button wx:if="{{is_getphone}}" class="u-authorize-tool__define" open-type="getPhoneNumber" bindgetphonenumber="bindGetPhoneNumber" bindtap="onConfirm">允许</button>
+      <button wx:else class="u-authorize-tool__define" open-type="getUserInfo"  bindtap="getUserProfile">允许</button>
+    </view>
+  </view>
+</u-popup>

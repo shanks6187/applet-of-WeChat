@@ -1,0 +1,12 @@
+<!--pages/ques_detail/index.wxml-->
+<view class="container bg-gray">
+  <block wx:if="{{info.mp_url}}">
+    <web-view src="{{info.mp_url}}"></web-view>
+  </block>
+
+  <block wx:else>
+    <view class="fs40 col-10 mb50">{{info.title || ''}}</view>
+	<view class="fs32 col-3 mb30"><mp-html content="{{content}}" /></view>
+  </block>
+	
+</view>

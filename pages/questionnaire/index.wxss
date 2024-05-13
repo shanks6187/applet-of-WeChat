@@ -1,0 +1,172 @@
+/* pages/questionnaire/index.wxss */
+.ques-box {
+  position: relative;
+  padding: 75rpx 40rpx 70rpx;
+  font-size: 50rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FFFFFF;
+  line-height: 70rpx;
+}
+
+.ques-box .icon-ques {
+  margin-right: 20rpx;
+  display: block;
+  width: 42rpx;
+  height: 50rpx;
+}
+
+.questionnaire {
+  position: relative;
+  padding: 70rpx 60rpx 60rpx;
+  background: #FFFFFF;
+  border-radius: 60rpx 60rpx 0 0;
+}
+
+.questionnaire .ques {
+  margin: 0 0 30rpx;
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: bold;
+  color: #101010;
+  line-height: 36rpx;
+}
+
+.questionnaire .ques text {
+  color: var(--orange);
+}
+
+.answer-wrap {
+  padding: 0 0 40rpx;
+}
+
+.answer-wrap .answer1 {
+  margin: 0 30rpx 30rpx 0;
+  padding: 0 40rpx;
+  width: 300rpx;
+  height: 90rpx;
+  border-radius: 30rpx;
+  border: 1px solid #CCCCCC;
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #101010;
+  line-height: 90rpx;
+}
+
+.answer-wrap .answer1:nth-of-type(2n) {
+  margin: 0 0 30rpx;
+}
+
+.answer-wrap .answer1.active {
+  background: #9FDEDF;
+  border: 0;
+}
+
+.answer-wrap .answer2 {
+  margin: 20rpx 30rpx 0 0;
+  width: 190rpx;
+  height: 65rpx;
+  background: #F6F7F9;
+  border-radius: 33rpx;
+  font-size: 26rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #333333;
+  line-height: 65rpx;
+  text-align: center;
+}
+
+.answer-wrap .answer2:nth-of-type(3n) {
+  margin: 20rpx 0 0;
+}
+
+.answer-wrap .answer2.active {
+  background: #9FDEDF;
+  color: #000;
+}
+
+.mood {
+  margin: 0 0 70rpx;
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #000000;
+  line-height: 42rpx;
+  text-align: center;
+}
+
+.mood .icon-mood {
+  margin: 0 auto 10rpx;
+  display: block;
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.textarea {
+  margin: 30rpx 0 0;
+  padding: 30rpx;
+  width: 630rpx;
+  height: 200rpx;
+  background: #FAFAFA;
+  border-radius: 30rpx;
+}
+
+/*  */
+.upload {
+  position: relative;
+  margin: 0 15rpx 15rpx 0;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 30rpx;
+  overflow: hidden;
+}
+
+.upload.active {
+  padding: 60rpx 0 0;
+  background: #F5F5F5;
+  font-size: 26rpx;
+  font-family: PingFangSC-Regular,
+    PingFang SC;
+  font-weight: 400;
+  color: #999999;
+  line-height: 30rpx;
+  text-align: center;
+}
+
+.upload:nth-of-type(3n) {
+  margin: 0 0 15rpx;
+}
+
+.upload .del {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10rpx 0 0;
+  width: 200rpx;
+  height: 36rpx;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 0 0 20rpx 20rpx;
+}
+
+.upload .icon-close {
+  margin: 0 auto;
+  display: block;
+  width: 16rpx;
+  height: 16rpx;
+}
+
+.upload .img {
+  display: block;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 20rpx;
+}
+
+.upload .icon-upload {
+  margin: 0 auto 18rpx;
+  display: block;
+  width: 40rpx;
+  height: 40rpx;
+}

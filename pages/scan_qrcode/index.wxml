@@ -1,0 +1,9 @@
+<!--pages/scan_qrcode/index.wxml-->
+<wxs src="../../utils/common.wxs" module="util" />
+<view class="container p30">
+  <block>
+    <view class="g-card mb30 tc" bindtap="scan_qrcode">
+      扫一扫
+    </view>
+  </block>
+</view>

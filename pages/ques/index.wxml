@@ -1,0 +1,16 @@
+<!--pages/ques/index.wxml-->
+<view class="container bg-gray">
+  <block wx:if="{{list.length > 0}}">
+    <navigator class="box" url="../ques_detail/index?id={{vo.id}}" hover-class="none" wx:for="{{list}}" wx:for-item="vo">
+      <view class="fs34 col-10 m-arrow-right mb20">{{vo.title || ''}}</view>
+      <view class="fs32 col-89 m-ellipsis-l2">
+        {{vo.description || ''}}
+      </view>
+    </navigator>
+  </block>
+
+  <block wx:else>
+    <view style="text-align: center; line-height: 300rpx;">暂无数据</view>
+  </block>
+
+</view>

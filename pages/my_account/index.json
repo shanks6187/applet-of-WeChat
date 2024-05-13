@@ -1,0 +1,7 @@
+{
+  "usingComponents": {},
+  "navigationBarBackgroundColor": "#EB7D4C",
+  "navigationBarTitleText": "我的账户",
+  "navigationBarTextStyle": "white",
+  "onReachBottomDistance": 30
+}

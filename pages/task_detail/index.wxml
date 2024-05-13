@@ -1,0 +1,189 @@
+<!--pages/task_detail/index.wxml-->
+<wxs src="../../utils/common.wxs" module="util" />
+<view class="container p30">
+  <view class="pr header">
+    <view class="banner">
+      <swiper class="swiper" 
+        indicator-dots 
+        indicator-color="rgba(255,255,255,0.5)"
+        indicator-active-color="#fff" 
+        indicatorDots="true"
+      >
+        <swiper-item wx:for="{{banners}}" wx:for-item="banner_item" wx:key="index">
+          <image class="banners" src="{{util.show_image(banner_item)}}" mode="scaleToFill"></image>
+        </swiper-item>
+        <!-- <swiper-item><image class="banners" src="/static/icon/icon_message2.png"></image></swiper-item>
+        <swiper-item><image class="banners" src="/static/icon/icon_message2.png"></image></swiper-item> -->
+      </swiper>
+    </view>
+    <view class="title">{{detail.appointData.multi_appoint_name}}</view>
+    <view class="price_tag flex-box flex-center">
+      <view class="price">¥{{mini_price}}/人</view>
+      <image src="/static/icon/duobianxing2.png" mode="aspectFill" class=""/>
+    </view>
+  </view>
+  <view class="flex-box">
+    <image src="/static/icon/Clock.png" mode="aspectFill" class="icon-time mr15"/>
+    <view class="time">
+      {{detail.appointData.appoint_time_str}}
+    </view>
+  </view>  
+  <view class="flex-box flex-between address_container">
+    <view class="flex-box">
+      <image src="/static/icon/MapPin.png" mode="aspectFill" class="icon-addr mr15"/>
+      <view class="address">
+        {{detail.appointData.restaurant_address}} {{util.distance_formatter(detail.appointData.distance||0)}}
+      </view> 
+    </view> 
+    <view class="map mr5" data-lat="{{detail.appointData.lat}}" data-lng="{{detail.appointData.lng}}" bindtap="openLocation">
+      <image src="/static/icon/icon_go.png" mode="aspectFit" class="icon-go" />
+    </view>
+  </view> 
+  <view class="flex-box mt20 flex-between">
+    <view class="flex-box">
+      <image src="{{util.show_image(detail.appointData.orgn_logo_url)}}" mode="aspectFill" class="icon-time mr15"/>
+      <view class="organizat">
+        {{detail.appointData.orgn_name}}
+      </view>
+      <view class="source br5 ml10">
+        官方
+      </view>
+    </view>  
+    <view class="wechart mr5 tc" bindtap="verify_action">添加官方微信</view>
+  </view>
+  <view class="invoice fs24 lh36 mt20">
+    <block wx:if="{{detail.ticket_member_list.length > 1 || (detail.ticket_member_list.length === 1 && detail.ticket_member_list[0].signupNum != 0)}}" wx:for="{{detail.ticket_member_list}}" wx:for-item="ticket_member_item" wx:key="index">
+      <view class="card p20">
+        <view class="flex-box flex-between">
+          <view>{{ticket_member_item.ticketName}}{{ticket_member_item.ticketNum}}张</view>
+          <view wx:if="{{ticket_member_item.ticketNum===ticket_member_item.signupNum}}">人已满</view>
+          <view wx:else class="FF7336">倒数{{ticket_member_item.ticketNum-ticket_member_item.signupNum}}个名额</view>
+        </view>
+        <block wx:if="{{ticket_member_item.memberList.length > 0}}">
+          <view class="flex flex-align-start pt30">
+            <view wx:for="{{ticket_member_item.memberList}}" wx:for-item="member_list_item" wx:key="vo">
+            <view class="user mr30" wx:if="{{index < 6}}">
+              <image class="icon-user"  src="/static/icon/icon_head{{member_list_item.avatar||1}}.png"/>
+              <image src="/static/icon/icon_gender{{member_list_item.gender ==0?6:member_list_item.gender}}.png" mode="aspectFill" class="icon-gender" />
+            </view>
+          </view>
+          </view>
+        </block>      
+      </view>
+      <view wx:if="{{detail.ticket_member_list.length-1 > index}}" class="flex-box mt20 flex-center"><view class="bb"></view></view>
+    </block>
+  </view>
+
+  <rich-text class="mt20 mb20" nodes="{{detail.appointData.multi_appoint_detail}}"></rich-text>
+
+  <block>
+    <view class="evaludate-list lh36" wx:for="{{detail.$commentList}}" wx:key="index" wx:for-item="commentItem">
+      <view class="item">
+        <view class="head flex-box mb30">
+          <view class="avatar mr30">
+            <image src="/static/icon/icon_head{{commentItem.user.avatar||1}}.png" mode="aspectFill" class="img" />
+            <image src="/static/icon/icon_gender{{commentItem.user.gender ==0?6:commentItem.user.gender}}.png" mode="aspectFill" class="sex" />
+          </view>
+          <view class="name fwb fs30">{{ commentItem.user.nickname || commentItem.user.username}}</view>
+        </view>
+        <view class="desc mb20 fs30">{{commentItem.comment}}</view>
+        <view class="images flex-box mb50">
+          <image 
+            src="{{util.show_image(iamge_item)}}"
+            mode="aspectFill" 
+            wx:for="{{commentItem.image_list}}" 
+            wx:for-item="iamge_item"
+            wx:key="iamge_item"
+            wx:if="{{index<3}}"
+            class="{{(index+1)%3===0?'image':'image mr30'}}" 
+            bindtap="show_list_image" 
+            data-item="{{commentItem}}" 
+            data-url="{{util.show_image(iamge_item)}}"
+          />
+          <!-- <view ></view> -->
+          <!-- <view class="image mr30"></view>
+          <view class="image"></view> -->
+        </view>
+        <view wx:if="{{detail.$commentList.length -1 !== index }}" class="line"></view>
+      </view>
+    </view>
+  </block>
+
+  <view class="page-foot flex-box flex-between fixed-button fs22 foot_btn">
+    <button class="action flex flex-col ac share_btn" open-type="contact" >
+      <image src="/static/icon/Headset.png" mode="aspectFit" class="icon mb10" />
+      <view class="text">客服</view>
+    </button>
+    <button class="action flex flex-col ac share_btn" open-type="share" >
+      <image src="/static/icon/ArrowSquareOut.png" mode="aspectFit" class="icon mb10" />
+      <view class="text">分享</view>
+    </button>
+    <view wx:if="{{comment_order_id !== 0}}" class="action flex flex-col ac" bindtap="to_comment">
+      <image src="/static/icon/ChatCenteredText.png" mode="aspectFit" class="icon mb10" />
+      <view class="text">评价</view>
+    </view>
+    <view wx:else class="action flex flex-col ac" ></view>
+    <view wx:if="{{disabled}}" class="joindisabled">已结束</view>
+    <view wx:else class="join" bindtap="showModal">立即参与（￥{{current_ticket_info.ticket_price}}）</view>
+  </view>
+
+  <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showDiscountsModal}}"></view>
+  <view class="modal-container">
+    <view>
+      <!-- <view class="page-foot buy-container" wx:if="{{showDiscountsModal}}">
+        <view class="buy-container-title fs24 lh38 mb10 tc">以下票种已售罄</view>
+        <view class="card fs24 lh38 mb30">
+          <view class="desc fs24 lh38 mb10">早鸟票</view>
+          <view class="desc fs24 lh38">报名截止时间：10月25日 周三 20:00</view>
+          <view class="icon"></view>
+          <view class="money fs24">￥68.00/人</view>
+        </view>
+        <view class="button tc fs24 fwb">立即参与（￥88.00）</view>
+      </view> -->
+      <!-- 根据是否有class card-select区分是否选中卡片 -->
+      <view class="page-foot buy-container" wx:if="{{showDiscountsModal}}">
+        <block wx:if="{{ticketList.length}}" wx:for="{{ticketList}}" wx:for-item="ticket_item" wx:key="index">
+          <view 
+            class="{{ticket_item.id === current_ticket_info.id?'card fs24 lh38 mb20 card-select':'card fs24 lh38 mb20'}}"
+            bindtap="handleCurrentTicketInfo"
+            data-item="{{ticket_item}}"
+          >
+            <view class="desc type fs24 lh38">{{ticket_item.ticket_name}}</view>
+            <view class="desc fs24 lh44">报名截止时间：{{detail.appointData.deadLineStr}}</view>
+            <image wx:if="{{ticket_item.id === current_ticket_info.id}}" class="icon" mode="aspectFill" src="/static/icon/icon_checkon.png" />
+            <image wx:else class="icon" mode="aspectFill" src="/static/icon/icon_select.jpg" />
+            <view class="money fs24 lh38">￥{{ticket_item.ticket_price}}/人</view>
+          </view>
+        </block>
+        <block wx:if="{{halt_ticketList.length}}" >
+          <view class="buy-container-title fs24 lh38 tc fwb">以下票种已售罄</view>
+          <view wx:for="{{halt_ticketList}}" wx:for-item="halt_ticket_item" wx:key="index" class="card fs24 lh38 mb20">
+            <view class="desc type fs24 lh38">{{halt_ticket_item.ticket_name}}</view>
+            <view class="desc fs24 lh44">报名截止时间：{{detail.appointData.deadLineStr}}</view>
+            <image class="icon" mode="aspectFill" src="/static/icon/icon_select.jpg" />
+            <view class="money fs24 lh38">￥{{halt_ticket_item.ticket_price}}/人</view>
+          </view>
+        </block>
+        <view bindtap="appointOrder" class="button tc fs24 fwb mt30">立即参与（￥{{current_ticket_info.ticket_price}}）</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showQrCodeModal}}"></view>
+  <view class="modal-container" wx:if="{{showQrCodeModal}}">
+    <view class="modal-dialog">
+        <view class="container-view" >
+          <view>
+            <view class="tc mb20 toast">长按二维码，添加官方微信</view>
+            <view class="flex-box flex-center">
+              <image class="img" show-menu-by-longpress="true" src="{{util.show_image(detail.appointData.official_qrcode_url)}}"></image>
+            </view>
+          </view>
+        </view>
+    </view>
+  </view>
+
+<!-- showAuth -->
+  <u-authorize show="{{showAuth}}" is_getphone="true" bind:close="authClose" bind:confirm="authConfirm"></u-authorize>
+  
+</view>

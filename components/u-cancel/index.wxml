@@ -1,0 +1,28 @@
+<!--components/u-cancel.wxml-->
+<u-popup show="{{show}}">
+  <view class="pop1">
+    <image bind:tap="onCancel" src="/static/icon/icon_close1.png" mode="aspectFit" class="icon-close" />
+    <view class="fs30 col-6 mb50">提示</view>
+
+    <view wx:if="{{!is_sure}}" class="fs34 col-10 mb60 fwb">
+      <view>未匹配前取消</view>
+      <view>定金全额返还</view>
+    </view>
+
+     <!-- <view wx:else class="fs34 col-10 mb60 fwb">
+      <view>取消订单后</view>
+      <view>平台会没收定金</view>
+    </view> -->
+    <view wx:else class="fs34 col-10 mb60 fwb">
+      <view>取消后</view>
+      <view>平台会没收活动费用</view>
+    </view>
+
+    <view class="flex-box flex-between">
+     
+      <view class="btn1" bindtap="cancelSave" >狠心取消</view>
+
+      <view class="btn2" bind:tap="onCancel">我再看看</view>
+    </view>
+  </view>
+</u-popup>

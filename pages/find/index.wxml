@@ -1,0 +1,86 @@
+<!--pages/find/index.wxml-->
+<wxs src="../../utils/common.wxs" module="util" />
+<view class="container">
+  <view class="m-header">
+    <u-navigation left="{{true}}" title="发现" color="#333333" background="#FAFAFA" bindgetBarInfo="getBarInfo">
+      <view slot="left" class="flex-box pl15" bindtap="toggleCity">
+        <image src="/static/icon/icon_addr1.png" mode="aspectFit" class="icon-addr" />
+        <view class="mr15 ml10 fs32 col-3">{{city_name}}</view>
+        <view class="arrow"></view>
+      </view>
+    </u-navigation>
+    <view class="city-box" wx:if="{{isCity && hotCitys.length > 0}}">
+      <view class="fs28 col-6 pb10">热门城市</view>
+      <view class="hot-city flex-box flex-wrap">
+        <block wx:for="{{hotCitys}}" wx:for-item="vo">
+          <view class="item" bindtap="chooseCity" data-params="{{vo}}">{{vo.name}}</view>
+        </block>
+      </view>
+
+      <scroll-view class="scroll-city" scroll-y="{{true}}" scroll-into-view="{{'city-' + scrollId}}">
+        <block wx:for="{{citysAll}}" wx:for-item="vo">
+          <view id="city-{{vo.letter}}">
+            <view class="zimu">{{vo.letter}}</view>
+            <view class="city" wx:for="{{vo.list}}" wx:for-item="vv" bindtap="chooseCity" data-params="{{vv}}">{{vv.name}}</view>
+          </view>
+        </block>
+      </scroll-view>
+
+      <view class="fixed-zimu">
+        <view wx:for="{{zimuArr}}" data-zimu="{{item}}" bindtap="selectZimu">{{item}}</view>
+      </view>
+
+    </view>
+  </view>
+  <view class="mask" wx:if="{{isCity}}" bindtap="closePop"></view>
+
+  <view class="page-body" style="padding-top: {{topBarHeight + 20}}px;">
+    <swiper class="swiper" circular="{{true}}" indicator-dots="{{true}}" indicator-active-color="#FFFFFF" indicator-color="rgba(0,0,0,0.1)">
+      <swiper-item wx:for="{{banner}}" wx:for-item="vo">
+        <image bindtap="banner_detail" data-params="{{vo}}" src="{{util.show_image(vo.thumb_image)}}" mode="aspectFill" />
+      </swiper-item>
+    </swiper>
+
+    <block wx:if="{{list.length > 0}}">
+      <view class="find" wx:for="{{list}}" wx:for-item="vo">
+        <view wx:if="{{vo.appoint.appoint_type == 2}}" class="ptb30 m-hairline--bottom flex-box">
+          <view class="fs32 col-3 flex-1">
+            {{vo.multi.multi_appoint_name || ''}}
+          </view>
+          <navigator class="m-arrow-right nav" url="../task_detail/index?id={{vo.multi.appoint_id}}" hover-class="none">活动详情</navigator>
+        </view>
+        <view wx:else class="ptb30 m-hairline--bottom flex-box">
+          <view class="fs32 col-3 flex-1">
+            {{vo.restaurant.restaurant_name || ''}}
+          </view>
+          <navigator class="m-arrow-right nav" url="../restaurant_detail/index?id={{vo.restaurant_id}}&c_id={{vo.id}}" hover-class="none">美食详情</navigator>
+        </view>
+
+        <view class="ptb30 flex-box">
+          <view class="head">
+            <image src="/static/icon/icon_head{{vo.user.avatar || 1}}.png" mode="aspectFill" class="img-head" />
+            <image src="/static/icon/icon_gender{{vo.user.gender == 0 ? 6 : vo.user.gender}}.png" mode="aspectFill" class="icon-gender" />
+          </view>
+          <view class="flex-1 fs30 col-3 fwb">{{vo.user.nickname || vo.user.username}}</view>
+        </view>
+
+        <view wx:if="{{vo.flags}}" class="flex-box flex-wrap">
+          <view class="label">{{vo.flags}}</view>
+        </view>
+
+        <view wx:for="{{vo.comment_text}}" wx:for-item="vv" class="fs30 col-3 lh42 pt10">
+          {{vv}}
+        </view>
+        <view wx:if="{{vo.image_list.length > 0}}" class="img-wrap flex-box flex-wrap pt30">
+          <image src="{{util.show_image(current_img)}}" bindtap="show_list_image" data-item="{{vo}}" data-url="{{util.show_image(current_img)}}" mode="aspectFill" class="img" wx:for="{{vo.image_list}}" wx:for-item="current_img" wx:for-index="keys" wx:if="{{keys < 3}}" />
+        </view>
+
+      </view>
+    </block>
+
+    <block wx:else>
+      <view style="text-align: center; line-height: 300rpx;">暂无发现</view>
+    </block>
+
+  </view>
+</view>

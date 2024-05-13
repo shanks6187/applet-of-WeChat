@@ -1,0 +1,103 @@
+/* pages/mine/index.wxss */
+.container {
+  padding: 25rpx 30rpx;
+}
+
+.head {
+  position: relative;
+  margin: 0 0 50rpx 10rpx;
+  width: 192rpx;
+  height: 192rpx;
+  background: #3873B9;
+  border-radius: 50%;
+}
+
+.head .icon-head {
+  display: block;
+  width: 192rpx;
+  height: 192rpx;
+  border-radius: 50%;
+}
+
+.head .icon-gender {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: block;
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+}
+
+.name {
+  font-size: 64rpx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #000000;
+  line-height: 90rpx;
+}
+
+.icon-add {
+  display: block;
+  width: 38rpx;
+  height: 38rpx;
+  align-self: flex-end;
+  margin-bottom: 14rpx;
+}
+
+.link {
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #333333;
+  line-height: 34rpx;
+}
+
+.link .icon {
+  margin-right: 20rpx;
+  display: block;
+  width: 45rpx;
+  height: 45rpx;
+}
+
+.pop1 {
+  position: relative;
+  padding: 40rpx 30rpx 30rpx;
+  width: 690rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  text-align: center;
+}
+
+.pop1 .icon-close {
+  position: absolute;
+  right: 30rpx;
+  top: 40rpx;
+  display: block;
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.pop1 .btn1 {
+  width: 300rpx;
+  height: 85rpx;
+  background: #F5F6F7;
+  border-radius: 30rpx;
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #333333;
+  line-height: 85rpx;
+}
+
+.pop1 .btn2 {
+  width: 300rpx;
+  height: 85rpx;
+  background: #EB7D4C;
+  border-radius: 30rpx;
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 85rpx;
+}

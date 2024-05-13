@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "u-navigation":"/components/u-navigation/index"
+  },
+  "navigationStyle": "custom"
+}

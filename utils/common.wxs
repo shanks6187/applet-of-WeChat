@@ -1,0 +1,107 @@
+//显示图片
+var show_image = function show_image(image_path = '') {
+    // var image_url = "https://xilu-images.oss-cn-shanghai.aliyuncs.com";
+    // mock mirror
+    var image_url = "https://dadatest.darlingty.com"
+    if (!image_path) {
+        return '/static/images/avatar.png';
+    } else if (image_path.indexOf("data:image") != -1) {
+        return image_path;
+    } else if (image_path.indexOf("http") == -1) {
+        return image_url + image_path;
+    } else {
+        return image_path;
+    }
+}
+
+// 后端存在没处理的图片，需要前端单独处理一下
+var show_image2 = function show_image(path = '') {
+    var image_path = path.split(',')[0]
+    // var image_url = "https://xilu-images.oss-cn-shanghai.aliyuncs.com";
+    // mock mirror
+    var image_url = "https://dadatest.darlingty.com"
+    console.log(image_path)
+    if (!image_path) {
+        return '/static/images/avatar.png';
+    } else if (image_path.indexOf("data:image") != -1) {
+        return image_path;
+    } else if (image_path.indexOf("http") == -1) {
+        return image_url + image_path;
+    } else {
+        return image_path;
+    }
+}
+
+//价格格式化
+var formate_price = function formate_price(price,number=0) {
+    return parseFloat(price).toFixed(number);
+}
+//地址格式化
+var distance_formatter = function (distance) {
+    if (parseFloat(distance) > 1000) {
+        var show_distance = (parseFloat(distance) / 1000).toFixed(2);
+        return show_distance + 'km';
+    } else {
+        return parseFloat(distance).toFixed(2) + 'm';
+    }
+}
+
+//判断数组中 是否包含 某个值
+
+var is_array = function is_array(arr_list, value) {
+    if (arr_list.indexOf(value) != '-1') {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//手机号***
+var mobile_hidden = function mobile_hidden(mobile) {
+    return mobile.substring(0, 3) + "*****" + mobile.substring(7, 12);
+}
+//字符串转整数
+var string_int = function string_int(str) {
+    return parseInt(str);
+}
+// 秒转 几小时 几分钟
+var seconds_minute_hours = function string_int(seconds, is_type = 1) {
+    var result;
+    var minute = 60;
+    if (seconds < 0) {
+        return;
+    }
+    var secondTime = parseInt(seconds);
+    var hourC = 0;
+    var minC = 0;
+    if (seconds > minute) {
+        //获取分钟，除以60取整数，得到整数分钟
+        minC = parseInt(secondTime / minute);
+        //获取秒数，秒数取佘，得到整数秒数
+        secondTime = parseInt(secondTime % minute);
+        //如果分钟大于60，将分钟转换成小时
+        if (minC > minute) {
+            //获取小时，获取分钟除以60，得到整数小时
+            hourC = parseInt(minC / minute);
+            //获取小时后取佘的分，获取分钟除以60取佘的分
+            minC = parseInt(minC % minute);
+        }
+    }
+    result = parseInt(hourC) + "小时" + parseInt(minC) + " 分钟";
+    if (is_type == 2) {
+        result = parseInt(hourC);
+    } else if (is_type == 3) {
+        result = parseInt(minC);
+    }
+    return result;
+}
+module.exports = {
+    formate_price: formate_price,
+    is_array: is_array,
+    mobile_hidden: mobile_hidden,
+    string_int: string_int,
+    seconds_minute_hours: seconds_minute_hours,
+    show_image: show_image,
+    show_image2: show_image2,
+    distance_formatter:distance_formatter
+};

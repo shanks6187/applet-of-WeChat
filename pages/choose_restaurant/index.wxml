@@ -1,0 +1,46 @@
+<!--pages/choose_restaurant/index.wxml-->
+<view class="page-head">
+  <view class="p30">
+    <view class="search flex-box plr30">
+      <image src="/static/icon/icon_search.png" mode="aspectFit" />
+      <input confirm-type="search" bindconfirm="searchRestaurants" class="flex-1" type="text" placeholder="请输入您的门店地址" />
+    </view>
+
+    <view class="mt30 m-hairline--top search-list" wx:if="{{isShow}}">
+      <view class="restaurant m-hairline--bottom" wx:for="{{recLists}}" wx:for-item="vo" data-params="{{vo}}" bindtap="chooseRestaurant">
+        <view class="flex-box mb30">
+          <view class="name flex-1">
+          <text class="col-orange">{{vo.title}}</text>
+          </view>
+          <view class="col-orange fs26">{{vo.distance}}</view>
+        </view>
+        <view class="fs30 lh42 col-9">{{vo.address}}</view>
+      </view>
+    </view>
+
+  </view>
+
+  <view class="mask" wx:if="{{isShow}}"></view>
+
+</view>
+<view class="container">
+  <map class="map" longitude="{{lng}}" latitude="{{lat}}" markers="{{markers}}"/>
+
+  <view class="plr30">
+    <view class="ptb30 fs30 col-9 lh44 m-hairline--bottom">附近餐厅位置</view>
+    <block wx:if="{{lists.length > 0}}">
+      <view wx:for="{{lists}}" wx:for-item="vo" data-params="{{vo}}" bindtap="chooseRestaurant" class="restaurant m-hairline--bottom">
+      <view class="flex-box mb30">
+        <view class="name flex-1">{{vo.title}}</view>
+        <view class="col-orange fs26">{{vo.distance}}</view>
+      </view>
+      <view class="fs30 lh42 col-9">{{vo.address}}</view>
+    </view>
+    </block>
+
+    <block wx:else>
+      <view style="text-align: center; line-height: 2pprpx;">没有检索到附近餐厅，请输入具体地址查询</view>
+    </block>
+    
+  </view>
+</view>

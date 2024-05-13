@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "u-countdown":"/components/u-countdown/index",
+    "u-authorize":"/components/u-authorize/index",
+    "u-changetime":"/components/u-changetime/index",
+    "u-cancel":"/components/u-cancel/index"
+  },
+  "navigationBarTitleText": "聊天列表",
+  "navigationBarBackgroundColor": "#FAFAFA",
+  "enablePullDownRefresh":true
+}

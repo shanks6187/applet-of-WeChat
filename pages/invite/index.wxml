@@ -1,0 +1,98 @@
+<!--pages/invite/index.wxml-->
+<view class="container">
+  <view class="title">餐厅</view>
+  <view wx:if="{{!restaurantInfo}}" class="box flex-box">
+    <input disabled="true" bindtap="chooseRestaurant" type="text" class="flex-1 fs30 col-3" placeholder="请输入餐厅名称" />
+    <image src="/static/icon/icon_addr.png" mode="aspectFit" class="icon-addr" />
+  </view>
+
+  <view wx:else class="box" style="height: unset;padding: 24rpx 30rpx;" bindtap="chooseRestaurant">
+    <view class="flex-box mb25">
+      <view class="flex-1 fs30 col-3">{{restaurantInfo.title}}</view>
+      <view class="fs26 col-orange">{{restaurantInfo.distance}}</view>
+    </view>
+    <view class="flex-box">
+      <view class="flex-1 fs28 col-6">{{restaurantInfo.address}}</view>
+      <image src="/static/icon/icon_go.png" mode="aspectFit" class="icon-go" />
+    </view>
+  </view>
+
+
+  <view class="title">性别</view>
+  <view class="flex-box flex-between mb70">
+    <view bindtap="chooseSex" data-sex="1" class="gender flex-box flex-center {{sex == 1 ? 'active' : ''}}">
+      <image src="/static/icon/icon_gender3.png" mode="aspectFit" class="icon-gender" />
+      <view>男</view>
+    </view>
+    <view bindtap="chooseSex" data-sex="2" class="gender flex-box flex-center {{sex == 2 ? 'active' : ''}}">
+      <image src="/static/icon/icon_gender4.png" mode="aspectFit" class="icon-gender" />
+      <view>女</view>
+    </view>
+    <view bindtap="chooseSex" data-sex="0" class="gender flex-box flex-center {{sex == 0 ? 'active' : ''}}">
+      <image src="/static/icon/icon_gender5.png" mode="aspectFit" class="icon-gender" />
+      <view>不限</view>
+    </view>
+  </view>
+
+  <view class="flex-box title">
+    <view class="flex-1 mr30">我要</view>
+    <view class="flex-1">目的</view>
+  </view>
+  <view class="flex-box flex-align-start" style="margin-bottom: 70rpx;">
+    <view class="flex-1 flex-box mr30 option-wrap">
+      <view bindtap="chooseWant" data-want="1" class="option flex-1 {{is_want == 1 ? 'active' : ''}}">AA</view>
+      <view bindtap="chooseWant" data-want="2" class="option flex-1 {{is_want == 2 ? 'active' : ''}}">请客</view>
+    </view>
+    <view class="flex-1 flex-box option-wrap">
+      <view bindtap="chooseTo" data-to="1" class="option flex-1 {{is_to == 1 ? 'active' : ''}}">交友</view>
+      <view bindtap="chooseTo" data-to="2" class="option flex-1 {{is_to == 2 ? 'active' : ''}}">吃饭</view>
+    </view>
+  </view>
+
+  <view class="title">时间</view>
+  <view class="flex-box flex-between">
+    <picker mode="date" value="{{date}}" bindchange="dateChange">
+      <view class="box flex-box" style="width: 300rpx;">
+        <view class="fs30 col-3 flex-1 m-arrow-right">{{date.length > 0 ? date : '选择日期'}}</view>
+      </view>
+    </picker>
+    <picker mode="multiSelector" range="{{multiArray}}" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}">
+      <view class="box flex-box" style="width: 300rpx;">
+        <view class="fs30 col-3 flex-1 m-arrow-right">{{multiIndex[0] >= 0 ? multiArray[0][multiIndex[0]] + ' - ' + multiArray[1][multiIndex[1]] : '选择时间段'}} </view>
+      </view>
+    </picker>
+  </view>
+
+  <view class="flex-box title">
+    <view class="flex-1">邀约定金</view>
+    <image bindtap="toggleTip" src="/static/icon/icon_tip.png" mode="aspectFit" class="icon-tip" />
+    <view bindtap="toggleTip" class="tip-box" wx:if="{{isShowTip}}" style="display: {{isShowTip ? 'block' : 'none'}};">邀约定金，双方支付相同金额开启邀约。定金返还规则，双方均签到后，定金全额退还；若一方签到，邀约开始8小时后退还。取消规则，取消方没收定金，被取消方获得定金的{{money_tip.cancel_rate_user}}%。
+    </view> 
+  </view>
+
+
+  <view class="flex-box flex-wrap pb40">
+    <view wx:for="{{moneyList}}" wx:for-item="vo" class="deposit {{moneyIndex == index ? 'active' : ''}}" data-id="{{index}}" bindtap="chooseMoney">
+      <text class="fs24">¥</text>
+      <text>{{vo}}</text>
+    </view>
+
+  </view>
+
+  <!-- <view class="flex-box fs30 mb70">
+    <image bindtap="chooseAgree" src="/static/icon/icon_check{{is_agree ? 'on' : ''}}.png" mode="aspectFit" class="icon-check" />
+    <view bindtap="chooseAgree" class="col-5">我已阅读并同意</view>
+    <view bindtap="cms_detail" data-type="1" class="col-normal">《发布协议》</view>
+    <view class="col-5">和</view>
+    <view bindtap="cms_detail" data-type="5" class="col-normal">《隐私政策》</view>
+  </view> -->
+
+  <view bindtap="addPublish" class="g-btn2">发起邀约</view>
+
+  <!-- <u-popup show="{{true}}" type="bottom">
+    <view class="bg-white">
+      <van-picker columns="{{ columns }}" bind:change="onChange" />
+    </view>
+  </u-popup> -->
+
+</view>

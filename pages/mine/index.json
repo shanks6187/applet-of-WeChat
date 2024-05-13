@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "u-popup":"/components/u-popup/index",
+    "u-authorize":"/components/u-authorize/index"
+  },
+  "navigationBarBackgroundColor": "#FAFAFA",
+  "navigationBarTitleText": ""
+}

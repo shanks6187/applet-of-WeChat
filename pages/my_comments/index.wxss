@@ -1,0 +1,30 @@
+/* pages/my_comments/index.wxss */
+.container {
+  background: #FAFAFA;
+}
+
+.comment {
+  padding: 0 30rpx 30rpx;
+  margin: 0 0 30rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+}
+
+.comment .m-arrow-right::after {
+  margin-top: -10rpx;
+  border-color: var(--orange);
+  width: 18rpx;
+  height: 18rpx;
+}
+
+.img-wrap .img {
+  margin: 30rpx 30rpx 0 0;
+  display: block;
+  width: 190rpx;
+  height: 190rpx;
+  border-radius: 30rpx;
+}
+
+.img-wrap .img:nth-of-type(3n) {
+  margin: 30rpx 0 0;
+}

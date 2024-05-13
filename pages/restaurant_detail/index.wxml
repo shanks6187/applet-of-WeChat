@@ -1,0 +1,25 @@
+<!--pages/restaurant_detail/index.wxml-->
+<wxs src="../../utils/common.wxs" module="util" />
+<view class="container p30">
+  <view bindtap="openLocation" data-lat="{{info.lat || ''}}" data-lng="{{info.lng || ''}}" class="restaurant-box">
+    <view class="flex-box mb20">
+      <image src="/static/icon/icon_addr.png" mode="aspectFit" class="icon" />
+      <view class="flex-1 fs32 col-3">{{info.restaurant_name || ''}}</view>
+      <view class="fs26 col-orange">{{util.distance_formatter(info.distance)}}</view>
+    </view>
+    <view class="flex-box flex-align-end">
+      <view class="flex-1 fs28 col-6" style="margin-right: 156rpx;">{{info.restaurant_address || ''}}</view>
+      <image src="/static/icon/icon_go.png" mode="aspectFit" class="icon-go" />
+    </view>
+  </view>
+
+  <view wx:if="{{image_list.length > 0}}" class="restaurant-box">
+    <view class="flex-box">
+      <image src="/static/icon/icon_tuijian.png" mode="aspectFit" class="icon" />
+      <view class="flex-1 fs32 col-3">推荐菜品</view>
+    </view>
+    <view class="img-wrap flex-box flex-wrap pb10">
+      <image bindtap="show_image" data-url="{{util.show_image(vo)}}" src="{{util.show_image(vo)}}" mode="aspectFill" class="img" wx:for="{{image_list}}" wx:for-item="vo" />
+    </view>
+  </view>
+</view>

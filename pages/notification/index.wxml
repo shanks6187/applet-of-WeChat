@@ -1,0 +1,130 @@
+<!--pages/notification/index.wxml-->
+<wxs src="../../utils/common.wxs" module="util" />
+<view class="container p30">
+
+  <block wx:if="{{list.length > 0}}">
+
+    <view class="mb30" wx:for="{{list}}" wx:for-item="vo">
+      <view class="fs24 col-a tc mb30">{{vo.createtime_text}}</view>
+      <view class="g-card">
+        <view bindtap="orderDetail" data-appoint_type="{{vo.appoint.appoint_type}}" data-id="{{vo.appoint_id}}" data-orderid="{{vo.order_id}}" class="flex-box pb20 m-hairline--bottom">
+          <view wx:if="{{vo.appoint.appoint_type == 2}}" class="head">
+            <image src="/static/icon/icon_head{{vo.self.avatar || 1}}.png" mode="aspectFill" class="img-head" />
+            <image src="/static/icon/icon_gender{{vo.self.gender == 0 ? 6 :vo.self.gender}}.png" mode="aspectFill" class="icon-gender" />
+          </view>
+          <view class="head" wx:else>
+            <image src="/static/icon/icon_head{{vo.user.avatar || 1}}.png" mode="aspectFill" class="img-head" />
+            <image src="/static/icon/icon_gender{{vo.user.gender == 0 ? 6 :vo.user.gender}}.png" mode="aspectFill" class="icon-gender" />
+          </view>
+          <view class="flex-1">
+            <view class="flex-box">
+              <view wx:if="{{vo.appoint.appoint_type == 2}}" class="flex-1 name">{{vo.self.nickname || vo.self.username}}</view>
+              <view wx:else class="flex-1 name">{{vo.user.nickname || vo.user.username}}</view>
+              <block wx:if="{{vo.order.is_own == 1}}">
+                <view class="fs30 {{vo.appoint.status == 2 || vo.appoint.status == 3 ? 'col-normal' : 'col-9'}}">{{vo.appoint.status_text}}</view>
+              </block>
+
+              <block wx:else>
+                <block wx:if="{{vo.order.id}}">
+                  <view class="fs30 {{vo.order.status == 2 || vo.order.status == 3 ? 'col-normal' : 'col-9'}}">{{vo.order.status_text}}</view>
+                </block>
+
+                <block wx:else>
+                  <view class="fs30 {{vo.appoint.status == 2 || vo.appoint.status == 3 ? 'col-normal' : 'col-9'}}">{{vo.appoint.status_text}}</view>
+                </block>
+
+              </block>
+
+            </view>
+
+            <view wx:if="{{vo.appoint.appoint_type == 2}}" class="fs26 col-3 mt15">{{vo.multi.appoint_time_str}} </view>
+            <view wx:elif="{{vo.order.appoint_time_text}}" class="fs26 col-3 mt15">{{vo.order.appoint_time_text}} </view>
+
+            <view wx:else class="fs26 col-3 mt15">{{vo.appoint.appoint_date_text}}｜{{vo.appoint.times}} </view>
+          </view>
+        </view>
+        <view class="pt20" bindtap="openLocation" data-lat="{{vo.restaurant.lat}}" data-lng="{{vo.restaurant.lng}}">
+          <view class="flex-box mb20">
+            <view wx:if="{{vo.appoint.appoint_type == 2}}" class="flex-1 fs30 col-3">{{vo.multi.multi_appoint_name}}</view>
+            <view wx:else class="flex-1 fs30 col-3">{{vo.restaurant.restaurant_name}}</view>
+            <view class="fs26">{{util.distance_formatter(vo.distance)}}</view>
+          </view>
+          <view class="flex-box flex-align-end">
+            <view class="flex-1 fs28 col-6" style="margin-right: 156rpx;">{{vo.restaurant.restaurant_address}}</view>
+            <image src="/static/icon/icon_go.png" mode="aspectFit" class="icon-go" />
+          </view>
+        </view>
+        <view class="pt30 flex-box flex-end">
+          <block wx:if="{{vo.is_type == 2 && vo.appoint.status == 2}}">
+
+            <view wx:if="{{(vo.order.status == 2 && vo.appoint.appoint_type == 2) || vo.appoint.appoint_type == 1 || vo.appoint.appoint_type == 0}}" bind:tap="toggleCancel" data-item="{{vo}}" data-appointid="{{vo.appoint.id}}" data-orderid="0" data-sure="{{false}}" class="btn btn2 ">取消订单</view>
+
+            <view bindtap="toggleTime" data-id="{{vo.appoint.id}}" class="btn btn2 ml30">修改时间</view>
+
+            <button wx:if="{{vo.appoint.is_plantfrom == 1}}" class="btn btn1 ml30" open-type="share" data-id="{{vo.appoint.id}}" data-name="{{vo.restaurant.restaurant_name}}">邀请好友</button>
+
+          </block>
+
+          <block wx:if="{{vo.is_type == 3 && vo.appoint.status == 3 && vo.order.is_own == 1}}">
+
+            <view wx:if="{{(vo.order.status == 2 && vo.appoint.appoint_type == 2) || vo.appoint.appoint_type == 1 || vo.appoint.appoint_type == 0}}" bind:tap="toggleCancel" data-item="{{vo}}" data-appointid="{{vo.appoint_id}}" data-orderid="{{vo.order.id}}" data-sure="{{true}}" class="btn btn2 ml30">取消订单</view>
+
+            <view wx:if="{{vo.order.is_change_date}}" bindtap="show_time" data-params="{{vo}}" class="btn btn2 ml30">修改时间</view>
+
+            <view bindtap="sure_appoint" data-id="{{vo.order.id}}" data-item="{{vo}}" class="btn btn1 ml30">确认赴约</view>
+
+
+
+          </block>
+
+          <block wx:if="{{vo.is_type == 3 && vo.order.status == 3 && vo.order.is_own == 0}}">
+
+            <view wx:if="{{vo.appoint.appoint_type == 1}}" bind:tap="toggleCancel" data-appointid="0" data-item="{{vo}}" data-orderid="{{vo.order.id}}" data-sure="{{true}}" class="btn btn2 ml30">取消订单</view>
+
+            <view wx:if="{{vo.order.is_change_date}}" bindtap="show_time" data-params="{{vo}}" class="btn btn2 ml30">修改时间</view>
+          
+            <view bindtap="sure_appoint" data-id="{{vo.order.id}}" data-item="{{vo}}" class="btn btn1 ml30">确认赴约</view>
+
+          </block>
+
+          <block wx:if="{{vo.is_type == 4}}">
+            <view bindtap="to_comment" data-id="{{vo.order.id}}" class="btn btn1">写评价</view>
+          </block>
+
+          <block wx:if="{{vo.is_type == 5}}">
+            <view bindtap="to_comment_info" data-id="{{vo.order.id}}" class="btn btn1">查看评价</view>
+          </block>
+
+
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view style="text-align: center; line-height: 300rpx;">暂无记录</view>
+  </block>
+
+  <view>
+    <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showQrCodeModal}}">
+      <view class="modal-dialog" wx:if="{{showQrCodeModal}}">
+          <view class="container-view" >
+            <view>
+              <view class="tc title mb20">签到二维码</view>
+              <u-qrcode-container text="{{QrCode}}" size="330"></u-qrcode-container>
+              <view class="tc toast mt20">请在活动现场向工作人员出示</view>
+            </view>
+          </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 修改时间 -->
+  <u-changetime show="{{show_time}}" timeList="{{timesList}}" appoint_id="{{appoint_id}}" order_id="{{order_id}}" bind:close="show_change_time" bind:confirm="show_com_change_time"></u-changetime>
+
+  <!-- 取消订单 -->
+  <u-cancel show="{{show_cancel}}" bind:close="toggleCancel" is_sure="{{is_cancel_return}}" appoint_id="{{appoint_id}}" current_appoint_type="{{current_appoint_type}}" order_id="{{order_id}}" bind:close="toggleCancel" bind:confirm="cancelConfirm"></u-cancel>
+  <!-- 搭子时间修改 -->
+  <u-selecttime show="{{isSelectTime}}" bind:close="toggleTime" appoint_id="{{appoint_id}}" bind:confirm="da_change_time"></u-selecttime>
+
+</view>

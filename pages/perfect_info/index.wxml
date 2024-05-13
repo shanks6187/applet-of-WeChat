@@ -1,0 +1,117 @@
+<!--pages/perfect_info/index.wxml-->
+<wxs src="../../utils/common.wxs" module="util" />
+<view class="container">
+  <view class="head" bind:tap="toggleheadPop">
+    <image src="/static/icon/icon_head{{avatar_id || 1}}.png" mode="aspectFill" class="icon-head" />
+    <image src="/static/icon/icon_edit.png" mode="aspectFit" class="icon-edit" />
+  </view>
+
+  <view class="title mb30">昵称</view>
+  <view class="box flex-box">
+    <input bindinput="input_fileds" data-field="nickname" class="input flex-1" type="text" value="{{nickname || ''}}" placeholder="请输入昵称" />
+  </view>
+
+  <view class="title mb30">性别</view>
+  <view class="flex-box flex-between mb70">
+    <view bindtap="chooseSex" data-id="1" class="gender flex-box flex-center {{sex == 1 ? 'active' : ''}}">
+      <image src="/static/icon/icon_gender3.png" mode="aspectFit" class="icon-gender" />
+      <view>男</view>
+    </view>
+    <view bindtap="chooseSex" data-id="2" class="gender flex-box flex-center {{sex == 2 ? 'active' : ''}}">
+      <image src="/static/icon/icon_gender4.png" mode="aspectFit" class="icon-gender" />
+      <view>女</view>
+    </view>
+    <view bindtap="chooseSex" data-id="0" class="gender flex-box flex-center {{sex == 0 ? 'active' : ''}}">
+      <image src="/static/icon/icon_gender5.png" mode="aspectFit" class="icon-gender" />
+      <view>不限</view>
+    </view>
+  </view>
+
+  <view class="title mb30">年龄</view>
+  <picker mode="selector" range="{{settingOptions.age_ranges}}" value="{{ageIdx}}" bindchange="ageChange">
+    <view class="box flex-box">
+      <view class="input flex1">{{ageIdx >= 0 ? settingOptions['age_ranges'][ageIdx] : '请选择年龄'}}</view>
+      <image src="/static/icon/icon_arrow1.png" mode="aspectFit" class="icon-arrow" />
+    </view>
+  </picker>
+
+  <view class="title mb30">家乡</view>
+  <picker mode="region" level="city" value="{{home}}" bindchange="homeChange">
+    <view class="box flex-box">
+      <view class="input flex1">{{home.length > 0 ? home[0] + ' ' + home[1] : '请选择家乡'}}</view>
+      <image src="/static/icon/icon_arrow1.png" mode="aspectFit" class="icon-arrow" />
+    </view>
+  </picker>
+
+  <view class="flex-box mb30">
+    <view class="title flex-1">兴趣</view>
+    <image bind:tap="toggleHobby" src="/static/icon/icon_add.png" mode="aspectFit" class="icon-add" />
+  </view>
+  <view class="flex-box flex-wrap pb40">
+    <view wx:for="{{settingOptions.interestList}}" wx:for-item="vo" wx:if="{{util.is_array(interestIds,vo.id)}}" class="hobby active">{{vo.interest_name || ''}}</view>
+
+  </view>
+
+  <view class="flex-box mb30">
+    <view class="title mr20">真实姓名</view>
+    <view wx:if="{{userInfo.is_auth == 1}}" class="renzheng flex-box flex-center">
+      <image src="/static/icon/icon_id.png" mode="aspectFit" />
+      <view>实名已认证</view>
+    </view>
+  </view>
+  <view class="box flex-box">
+    <input bindinput="input_fileds" data-field="username" class="input flex-1" value="{{username || ''}}" disabled="{{userInfo.is_auth == 1 ? true : false}}" type="text" placeholder="请输入真实姓名" />
+  </view>
+
+  <view class="title mb30">身份证号</view>
+  <view class="box flex-box">
+    <input bindinput="input_fileds" data-field="idcard_no" disabled="{{userInfo.is_auth == 1 ? true : false}}" value="{{idcard_no || ''}}" class="input flex-1" type="text" placeholder="请输入身份证号" />
+  </view>
+
+  <view class="flex-box fs30 mb70 flex-align-start">
+    <image bindtap="chooseAgree" src="/static/icon/icon_check{{is_agree ? 'on' : ''}}.png" mode="aspectFit" class="icon-check mt5" />
+    <view class="flex-1 flex-box flex-wrap">
+      <view bindtap="chooseAgree" class="col-5">确认并同意</view>
+      <view bindtap="cms_detail" data-type="2" class="col-normal">《使用条款》</view>
+      <view class="col-5">和</view>
+      <view bindtap="cms_detail" data-type="5" class="col-normal">《隐私政策》</view>
+      <view class="col-5">和</view>
+      <view bindtap="cms_detail" data-type="1" class="col-normal">《邀约协议》</view>
+    </view>
+  </view>
+
+  <view bindtap="saveSetting" class="g-btn2">
+    提交信息
+  </view>
+
+  <u-popup show="{{hobbyPop}}" type="bottom" bind:close="toggleHobby">
+    <view class="hobby-pop">
+      <view class="row flex-box fs30">
+        <view class="col-10 fwb flex-1">选择兴趣</view>
+        <view bindtap="toggleHobby" class="col-6">完成</view>
+      </view>
+      <view class="hobby-list flex-box flex-wrap p20">
+        <block wx:for="{{settingOptions.interestList}}" wx:for-item="vo">
+          <view data-id="{{vo.id}}" bindtap="chooseInterest" class="hobby {{util.is_array(interestIds,vo.id) ? 'active' : ''}}">{{vo.interest_name}}</view>
+        </block>
+      </view>
+    </view>
+  </u-popup>
+
+  <u-popup show="{{headPop}}" type="bottom" bind:close="toggleheadPop">
+    <view class="hobby-pop">
+      <view class="row flex-box fs30">
+        <view class="col-10 fwb flex-1">选择头像</view>
+        <view bindtap="toggleheadPop" class="col-6">完成</view>
+      </view>
+      <view class="head-list flex-box flex-wrap p30">
+        <view class="head-item" wx:for="{{14}}" data-index="{{index + 1}}" bindtap="chooseAvatar">
+          <image src="/static/icon/icon_head{{index + 1}}.png" mode="aspectFill" class="icon-head" />
+          <image wx:if="{{avatar_id == (index + 1)}}" src="/static/icon/icon_checkon.png" mode="aspectFit" class="icon-checkon" />
+          <!-- <image wx:else src="/static/icon/icon_check.png" mode="aspectFit" class="icon-checkon" /> -->
+        </view>
+      </view>
+    </view>
+  </u-popup>
+
+</view>

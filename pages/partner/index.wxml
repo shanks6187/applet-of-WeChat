@@ -1,0 +1,185 @@
+<!--pages/partner/index.wxml-->
+<wxs src="../../utils/common.wxs" module="util" />
+<view class="container">
+  <view class="m-header">
+    <u-navigation left="{{true}}" title="找搭子" color="#333333" background="#FAFAFA" bindgetBarInfo="getBarInfo">
+      <navigator bindtap="messageList" slot="left" class="message {{message_count > 0 ? 'active' : ''}}" url="#" hover-class="none">
+        <image src="/static/icon/icon_message2.png" mode="aspectFit" class="icon-message" />
+      </navigator>
+    </u-navigation>
+
+    <view class="select-row flex-box">
+      <view class="flex-box" style="margin-right: 50rpx;" bindtap="toggleCity">
+        <image src="/static/icon/icon_addr1.png" mode="aspectFit" class="icon-addr" />
+        <view class="mr15 ml10">{{city_name}}</view>
+        <view class="arrow"></view>
+      </view>
+
+      <view class="flex-box" style="margin-right: 50rpx;" bindtap="toggleGender">
+        <image wx:if="{{genderIdx == 1}}" src="/static/icon/icon_gender3.png" mode="aspectFit" class="icon-gender" />
+        <image wx:elif="{{genderIdx == 2}}" src="/static/icon/icon_gender4.png" mode="aspectFit" class="icon-gender" />
+        <image wx:else src="/static/icon/icon_gender5.png" mode="aspectFit" class="icon-gender" />
+        <view class="mr15 ml10">{{genderIdx == 1 ? '男' : (genderIdx == 2 ? '女' : '不限')}}</view>
+        <view class="arrow"></view>
+      </view>
+
+      <view class="flex-box" bindtap="toggleWeek">
+        <image src="/static/icon/Calendar.png" mode="aspectFit" class="icon-addr" />
+        <view class="mr15 ml10">{{week_name}}</view>
+        <view class="arrow"></view>
+      </view>
+
+    </view>
+
+    <view class="city-box" wx:if="{{isCity}}">
+      <block wx:if="{{hotCitys.length > 0}}">
+        <view class="fs28 col-6 pb10">热门城市</view>
+        <view class="hot-city flex-box flex-wrap">
+          <block wx:for="{{hotCitys}}" wx:for-item="vo">
+            <view class="item" bindtap="chooseCity" data-params="{{vo}}">{{vo.name}}</view>
+          </block>
+
+
+        </view>
+      </block>
+
+
+      <scroll-view class="scroll-city" scroll-y="{{true}}" scroll-into-view="{{'city-' + scrollId}}">
+        <block wx:for="{{citysAll}}" wx:for-item="vo">
+          <view id="city-{{vo.letter}}">
+            <view class="zimu">{{vo.letter}}</view>
+            <view class="city" wx:for="{{vo.list}}" wx:for-item="vv" bindtap="chooseCity" data-params="{{vv}}">{{vv.name}}</view>
+          </view>
+        </block>
+
+      </scroll-view>
+
+      <view class="fixed-zimu">
+        <view wx:for="{{zimuArr}}" data-zimu="{{item}}" bindtap="selectZimu">{{item}}</view>
+      </view>
+
+    </view>
+
+    <view class="gender-box flex-box flex-between" wx:if="{{isGender}}">
+      <view class="gender flex-box flex-center {{genderIdx == 1 ? 'active' : ''}}" data-index="1" bindtap="selectGender">
+        <image src="/static/icon/icon_gender3{{genderIdx == 1 ? 'on' : ''}}.png" mode="aspectFit" />
+        <view>男</view>
+      </view>
+      <view class="gender flex-box flex-center {{genderIdx == 2 ? 'active' : ''}}" data-index="2" bindtap="selectGender">
+        <image src="/static/icon/icon_gender4{{genderIdx == 2 ? 'on' : ''}}.png" mode="aspectFit" />
+        <view>女</view>
+      </view>
+      <view class="gender flex-box flex-center {{genderIdx == 0 ? 'active' : ''}}" data-index="0" bindtap="selectGender">
+        <image src="/static/icon/icon_gender5{{genderIdx == 0 ? 'on' : ''}}.png" mode="aspectFit" />
+        <view>不限</view>
+      </view>
+    </view>
+
+    <view class="week-box" wx:if="{{isWeek}}">
+      <view class="week" wx:for="{{weekAll}}" wx:for-item="vv" bindtap="handleWeek" data-params="{{vv}}">{{vv.name}}</view>
+    </view>
+
+  </view>
+  <view class="mask" wx:if="{{isCity || isGender || isWeek}}" bindtap="closePop"></view>
+
+  <view class="page-body" style="padding-top: {{topBarHeight + 50}}px;">
+    <block wx:if="{{lists.length > 0}}">
+      <view class="g-card" wx:for="{{lists}}" wx:key="index" wx:for-item="vo">
+        <block wx:if="{{vo.appoint_type === 1}}" >
+          <view bindtap="detail" data-id="{{vo.id}}" data-my="{{vo.is_my || 0}}" class="flex-box pb20 m-hairline--bottom">
+            <view class="head">
+              <image src="/static/icon/icon_head{{vo.user.avatar || 1}}.png" mode="aspectFill" class="img-head" />
+              <image src="/static/icon/icon_gender{{vo.user.gender == 0 ? 6 : vo.user.gender}}.png" mode="aspectFill" class="icon-gender" />
+            </view>
+            <view class="flex-1">
+              <view class="flex-box">
+                <view class="name m-ellipsis" style="width: 4em;">{{vo.user.nickname || vo.user.username}}</view>
+                <view wx:if="{{vo.user.interest_list.length > 0}}" class="flex-box flex-wrap flex-end">
+                  <view wx:for="{{vo.user.interest_list}}" wx:for-item="vv" class="label" wx:if="{{index < 3}}">{{vv.interest_name}}</view>
+                </view>
+              </view>
+              <view class="fs26 col-3 mt15">{{vo.appoint_date_text}}｜{{vo.times}} </view>
+            </view>
+          </view>
+          <view wx:if="{{vo.restaurant}}" bindtap="openLocation" data-lat="{{vo.restaurant.lat}}" data-lng="{{vo.restaurant.lng}}" class="pt20">
+            <view class="flex-box mb20">
+              <view class="flex-1 fs30 col-3">{{vo.restaurant.restaurant_name}}</view>
+              <view class="fs26">{{util.distance_formatter(vo.distance)}}</view>
+            </view>
+            <view class="flex-box flex-align-end">
+              <view class="flex-1 fs28 col-6" style="margin-right: 156rpx;">{{vo.restaurant.restaurant_address}}</view>
+              <image src="/static/icon/icon_go.png" mode="aspectFit" class="icon-go" />
+            </view>
+          </view>
+        </block>
+        <block wx:elif="{{vo.appoint_type === 2}}" >
+          <view>
+            <view class="flex-box flex-between activity-card pb20">
+              <view class="img-container br10 pr">
+                <image src="{{util.show_image2(vo.multi.multi_appoint_banner)}}" />
+                <view wx:if="{{vo.status === 21}}" class="status flex-box flex-center status21">报名中</view>
+                <view wx:elif="{{vo.status === 22}}" class="status flex-box flex-center status22">已截止</view>
+                <view wx:elif="{{vo.status === 23}}" class="status flex-box flex-center status23">进行中</view>
+                <view wx:else class="status flex-box flex-center status24">已结束</view>
+              </view>
+              <view class="body">
+                <view class="title mb25">{{vo.multi.multi_appoint_name}}</view>  
+                <view class="flex-box mb15">
+                  <image src="/static/icon/Clock.png" mode="aspectFill" class="icon-time mr5"/>
+                  <view class="time">
+                    {{vo.multi.appoint_time_str}}
+                  </view>
+                </view>  
+                <view class="flex mb15">
+                  <image src="/static/icon/MapPin.png" mode="aspectFill" class="icon-addr mr5"/>
+                  <view class="address">
+                    {{vo.restaurant.restaurant_address}} {{util.distance_formatter(vo.distance)}}
+                  </view> 
+                </view>  
+                <view class="flex-box flex-align-start mb10">
+                  <image src="{{util.show_image(vo.multi.orgn_logo_url)}}" mode="aspectFill" class="icon-time mr5 icon-logo"/>
+                  <view class="organizat">
+                    {{vo.multi.orgn_name}}
+                  </view>
+                  <view class="source br5 ml5">
+                    官方
+                  </view>
+                </view>    
+              </view>
+            </view>
+            <view class="flex-box flex-between activity-footer plr15 mt20">
+              <view class="people flex-box">
+                <view class="people-img-container pr"  wx:if="{{vo.multi.signup_num > 0}}">
+                  <block wx:for="{{vo.member}}" wx:for-item="user" wx:key="index"  wx:if="{{index<=5}}">
+                    <view class="icon-people icon-people{{index+1}}">
+                      <image src="/static/icon/icon_head{{user.avatar || 1}}.png" mode="aspectFill" class="img" />
+                    </view>
+                  </block>
+                </view>
+                <view wx:if="{{vo.multi.signup_num > 0}}" class="people-count">{{vo.multi.signup_num}}{{vo.status === 21?"人想去":"人已参与"}}</view>
+              </view>
+              <view class="apply flex-box flex-end">
+                <view wx:if="{{vo.status === 21}}" class="button br10 flex-box flex-center" data-id="{{vo.id}}" bindtap="join_activit" >立即参与</view>
+                <view wx:else class="button2 br10 flex-box flex-center" data-id="{{vo.id}}" bindtap="join_activit" >查看</view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </block>
+
+    <block wx:else>
+      <view style="text-align: center; line-height: 200rpx;">暂无数据</view>
+    </block>
+
+
+  </view>
+
+  <navigator bindtap="publish" class="m-button" url="#" hover-class="none">
+    <image src="/static/icon/icon_init.png" mode="aspectFit" class="icon-kefu" />
+  </navigator>
+
+  <!-- showAuth -->
+  <u-authorize show="{{showAuth}}" is_getphone="true" bind:close="authClose" bind:confirm="authConfirm"></u-authorize>
+
+</view>

@@ -1,0 +1,132 @@
+<!--pages/questionnaire/index.wxml-->
+<wxs src="../../utils/common.wxs" module="util" />
+<form bindsubmit="submitComment">
+
+  <view class="container">
+  <image src="/static/icon/icon_bg1.png" mode="widthFix" class="m-backdrop" />
+  <view class="m-header">
+    <image src="/static/icon/icon_bg1.png" mode="widthFix" class="m-backdrop" />
+    <u-navigation back="{{true}}" background="rgba(0,0,0,0)" bindgetBarInfo="getBarInfo"></u-navigation>
+  </view>
+
+  <view class="flex-box ques-box" style="margin-top: {{topBarHeight}}px;">
+    <image src="/static/icon/icon_ques.png" mode="aspectFit" class="icon-ques" />
+    <view>问卷评价</view>
+  </view>
+
+  <view class="questionnaire">
+
+    <block wx:if="{{list.length > 0}}">
+
+      <block wx:for="{{list}}" wx:for-item="vo" wx:for-index="keys">
+
+        <block wx:if="{{vo.question_type == 1}}">
+          <!-- 单选题 -->
+          <block wx:if="{{vo.is_flag == 0}}">
+            <view class="ques">
+              <text wx:if="{{vo.is_require == 1}}" class="">*</text>
+              {{keys + 1}}.{{vo.title}}
+            </view>
+            <view class="answer-wrap flex-box flex-wrap flex-align-start">
+              <!-- <view class="answer1 active">A.会</view> -->
+              <view wx:for="{{vo.answer_list}}" wx:for-item="vv" wx:for-index="key" class="answer1 {{vv == vo.user_answer ? 'active' : ''}}" bindtap="radios_choose" data-index="{{keys}}" data-value="{{vv}}" data-no="{{key}}">{{key}}.{{vv}}</view>
+            </view>
+          </block>
+
+          <block wx:else>
+            <view class="ques">
+              <text wx:if="{{vo.is_require == 1}}" class="">*</text>
+              {{keys + 1}}.{{vo.title}}
+            </view>
+            <view class="flex-box flex-between">
+              <view class="mood" wx:for="{{vo.answer_list}}" wx:for-item="vv" wx:for-index="key" bindtap="radios_choose" data-index="{{keys}}" data-value="{{vv}}" data-no="{{key}}">
+                <image wx:if="{{vv == '优'}}" src="/static/icon/icon_mood2{{vv == vo.user_answer ? 'on' : ''}}.png" mode="aspectFit" class="icon-mood" />
+                <image wx:if="{{vv == '良'}}" src="/static/icon/icon_mood1{{vv == vo.user_answer ? 'on' : ''}}.png" mode="aspectFit" class="icon-mood" />
+                <image wx:if="{{vv == '中'}}" src="/static/icon/icon_mood3{{vv == vo.user_answer ? 'on' : ''}}.png" mode="aspectFit" class="icon-mood" />
+                <image wx:if="{{vv == '差'}}" src="/static/icon/icon_mood4{{vv == vo.user_answer ? 'on' : ''}}.png" mode="aspectFit" class="icon-mood" />
+                <view>{{vv}}</view>
+              </view>
+          
+            </view>
+          </block>
+
+        </block>
+
+        <block wx:elif="{{vo.question_type == 2}}">
+
+          <view class="ques">
+            <text wx:if="{{vo.is_require == 1}}" class="">*</text>
+            {{keys + 1}}.{{vo.title}}
+          </view>
+          <view class="answer-wrap mb30">
+            <view class="flex-box flex-wrap flex-align-start">
+              <!-- <view class="answer2 active">守时</view> -->
+              <view wx:for="{{vo.answer_list}}" wx:for-item="vv" wx:for-index="key" class="answer2 {{util.is_array((vo.user_answer || []),vv) ? 'active' : ''}}" bindtap="box_choose" data-index="{{keys}}" data-value="{{vv}}" data-no="{{key}}">{{vv}}</view>
+
+            </view>
+            <textarea wx:if="{{is_other == keys}}" bindblur="input_box_answer" class="textarea" placeholder=""></textarea>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="ques">
+            <text wx:if="{{vo.is_require == 1}}" class="">*</text>
+            {{keys + 1}}.{{vo.title}}
+          </view>
+          <textarea bindinput="input_content" data-index="{{keys}}" name="contents-{{keys}}" data-value="{{vv}}" data-no="{{key}}" class="textarea" placeholder="{{vo.tip}}"></textarea>
+        </block>
+
+      </block>
+      
+      <view wx:if="{{appoint_type == 2}}" class="fs30 col-5 mtb30">上传活动图片</view>
+      <view wx:else class="fs30 col-5 mtb30">上传菜品图片</view>
+      <view class="flex-box flex-wrap">
+        <view class="upload" wx:for="{{image_list}}" wx:for-item="vo" wx:for-index="keys">
+          <image class="img" src="{{util.show_image(vo)}}" mode="aspectFill" />
+          <view class="del" bindtap="delImage" data-index="{{keys}}">
+            <image class="icon-close" src="/static/icon/icon_close.png" mode="aspectFit" />
+          </view>
+        </view>
+        <view bindtap="choose_image" class="upload active">
+          <image class="icon-upload" src="/static/icon/icon_upload.png" mode="aspectFit" />
+          <view>上传图片</view>
+        </view>
+      </view>
+
+    </block>
+
+
+
+
+
+
+    <!-- <view class="ques">
+      <text class="">*</text>
+      4.你会把这家店推荐给其他人吗？
+    </view>
+    <view class="answer-wrap flex-box flex-wrap flex-align-start">
+      <view class="answer1 active">A.会</view>
+      <view class="answer1">B.不会</view>
+    </view> -->
+
+    <!-- <view class="ques">
+      <text class="">*</text>
+      5.你觉得这家店适合什么样的邀约？
+    </view>
+    <view class="answer-wrap flex-box flex-wrap flex-align-start">
+      <view class="answer1 active">A.商务</view>
+      <view class="answer1">B.两人约会</view>
+      <view class="answer1">C.朋友聚会</view>
+      <view class="answer1">D.家庭聚餐</view>
+    </view> -->
+
+
+
+
+
+    <button  class="g-btn2 mt50" form-type="submit">
+      确定提交
+    </button>
+
+  </view>
+</view>
+</form>

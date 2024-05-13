@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "u-navigation":"/components/u-navigation/index"
+  },
+  "navigationStyle": "custom",
+  "onReachBottomDistance": 30,
+  "enablePullDownRefresh":true
+}

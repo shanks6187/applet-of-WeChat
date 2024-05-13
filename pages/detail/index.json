@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "u-navigation":"/components/u-navigation/index",
+    "mp-html":"/components/mp-html/index"
+  },
+  "navigationStyle":"custom"
+}

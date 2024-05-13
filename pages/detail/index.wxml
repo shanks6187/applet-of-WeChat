@@ -1,0 +1,23 @@
+<!--pages/detail/index.wxml-->
+<wxs src="../../utils/common.wxs" module="util" />
+<view class="container">
+  <block wx:if="{{info.mp_url}}">
+    <web-view src="{{info.mp_url}}"></web-view>
+  </block>
+
+  <block wx:else>
+    <image src="{{util.show_image(acticity_image)}}" mode="widthFix" class="m-backdrop" />
+    <view class="m-header">
+      <image src="{{util.show_image(acticity_image)}}" mode="widthFix" class="m-backdrop" />
+      <u-navigation back="{{true}}" back-image="icon/icon_back2.svg" background="rgba(0,0,0,0)" bindgetBarInfo="getBarInfo"></u-navigation>
+    </view>
+
+    <view class="detail-box" style="margin-top: {{topBarHeight + 150}}px;">
+      <view class="fs36 col-10 fwb mb50">{{info.title || ''}}</view>
+      <mp-html content="{{content}}" />
+      <!-- <view class="fs30 col-5 mb70">疫情的不确定性，给展会行业带来非常大的冲击。受冲击的不仅是展会主办方、展会服务商、以及相关的配套行业，展会的参展企业其实损失是最大的</view>
+    <image src="/static/images/img3.png" mode="widthFix" style="width: 100%;margin: 0 auto 70rpx;border-radius: 30rpx;"/> -->
+    </view>
+  </block>
+
+</view>

@@ -1,0 +1,106 @@
+<!--pages/base_info/index.wxml-->
+
+<view class="container">
+  <view class="head" bind:tap="toggleheadPop">
+    <image src="/static/icon/icon_head6.png" mode="aspectFill" class="icon-head" />
+    <image src="/static/icon/icon_edit.png" mode="aspectFit" class="icon-edit" />
+  </view>
+
+  <view class="title mb30">昵称</view>
+  <view class="box flex-box">
+    <input class="input flex-1" type="text" placeholder="请输入昵称" />
+  </view>
+
+  <view class="title mb30">性别</view>
+  <view class="flex-box flex-between mb70">
+    <view class="gender flex-box flex-center">
+      <image src="/static/icon/icon_gender3.png" mode="aspectFit" class="icon-gender" />
+      <view>男</view>
+    </view>
+    <view class="gender flex-box flex-center">
+      <image src="/static/icon/icon_gender4.png" mode="aspectFit" class="icon-gender" />
+      <view>女</view>
+    </view>
+    <view class="gender flex-box flex-center active">
+      <image src="/static/icon/icon_gender5.png" mode="aspectFit" class="icon-gender" />
+      <view>不限</view>
+    </view>
+  </view>
+
+  <view class="title mb30">年龄</view>
+  <picker mode="selector" range="{{ageArr}}" value="{{ageIdx}}" bindchange="ageChange">
+    <view class="box flex-box">
+      <view class="input flex1">{{ageIdx >= 0 ? ageArr[ageIdx] : '请选择年龄'}}</view>
+      <image src="/static/icon/icon_arrow1.png" mode="aspectFit" class="icon-arrow" />
+    </view>
+  </picker>
+
+  <view class="title mb30">家乡</view>
+  <picker mode="region" level="city" value="{{home}}" bindchange="homeChange">
+    <view class="box flex-box">
+      <view class="input flex1">{{home.length > 0 ? home[0] + home[1] : '请选择家乡'}}</view>
+      <image src="/static/icon/icon_arrow1.png" mode="aspectFit" class="icon-arrow" />
+    </view>
+  </picker>
+
+  <view class="flex-box mb30">
+    <view class="title flex-1">兴趣</view>
+    <image bind:tap="toggleHobby" src="/static/icon/icon_add.png" mode="aspectFit" class="icon-add" />
+  </view>
+  <view class="flex-box flex-wrap pb40">
+    <view class="hobby active">影视</view>
+    <view class="hobby active">球类运动</view>
+    <view class="hobby active">live house</view>
+  </view>
+
+  <view class="flex-box mb30">
+    <view class="title mr20">真实姓名</view>
+    <view class="renzheng flex-box flex-center">
+      <image src="/static/icon/icon_id.png" mode="aspectFit" />
+      <view>实名已认证</view>
+    </view>
+  </view>
+  <view class="box flex-box">
+    <input class="input flex-1" type="text" placeholder="请输入真实姓名" />
+  </view>
+
+  <view class="title mb30">身份证号</view>
+  <view class="box flex-box">
+    <input class="input flex-1" type="text" placeholder="请输入身份证号" />
+  </view>
+
+  <view class="g-btn2">
+    确认修改
+  </view>
+
+  <u-popup show="{{hobbyPop}}" type="bottom" bind:close="toggleHobby">
+    <view class="hobby-pop">
+      <view class="row flex-box fs30">
+        <view class="col-10 fwb flex-1">选择兴趣</view>
+        <view class="col-6">完成</view>
+      </view>
+      <view class="hobby-list flex-box flex-wrap p30">
+        <view class="hobby active">影视</view>
+        <view class="hobby ">球类运动</view>
+        <view class="hobby ">live house</view>
+      </view>
+    </view>
+  </u-popup>
+
+  <u-popup show="{{headPop}}" type="bottom" bind:close="toggleheadPop">
+    <view class="hobby-pop">
+      <view class="row flex-box fs30">
+        <view class="col-10 fwb flex-1">选择头像</view>
+        <view class="col-6">完成</view>
+      </view>
+      <view class="head-list flex-box flex-wrap p30">
+        <view class="head-item" wx:for="{{14}}">
+          <image src="/static/icon/icon_head{{index + 1}}.png" mode="aspectFill" class="icon-head" />
+          <image src="/static/icon/icon_check.png" mode="aspectFit" class="icon-checkon" />
+          <image src="/static/icon/icon_checkon.png" mode="aspectFit" class="icon-checkon" />
+        </view>
+      </view>
+    </view>
+  </u-popup>
+
+</view>

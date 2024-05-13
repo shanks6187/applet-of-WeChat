@@ -1,0 +1,66 @@
+/* components/u-chagetime*/
+@import '/app.wxss';
+.pop1 {
+  position: relative;
+  padding: 40rpx 30rpx 30rpx;
+  width: 690rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  text-align: center;
+}
+
+.pop1 .icon-close {
+  position: absolute;
+  right: 30rpx;
+  top: 40rpx;
+  display: block;
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.pop1 .btn1 {
+  width: 300rpx;
+  height: 85rpx;
+  background: #F5F6F7;
+  border-radius: 30rpx;
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #333333;
+  line-height: 85rpx;
+}
+
+.pop1 .btn2 {
+  width: 300rpx;
+  height: 85rpx;
+  background: #EB7D4C;
+  border-radius: 30rpx;
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 85rpx;
+}
+
+.pop1 .time-label {
+  margin: 0 30rpx 30rpx 0;
+  width: 190rpx;
+  height: 65rpx;
+  background: #F6F7F9;
+  border-radius: 33rpx;
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #333333;
+  line-height: 65rpx;
+  text-align: center;
+}
+
+.pop1 .time-label:nth-of-type(3n) {
+  margin: 0 0 30rpx;
+}
+
+.pop1 .time-label.active {
+  background: #EB7D4C;
+  color: #FFFFFF;
+}

@@ -1,0 +1,40 @@
+<!--components/u-navigation/index.wxml-->
+<view class="weui-navigation-bar {{ios ? 'ios' : 'android'}} {{extClass}}" style="{{navibarStyle}}" bindtouchstart="_doubleClick">
+  <view wx:if="{{place}}" class="weui-navigation-bar__placeholder"></view>
+
+  <view class="weui-navigation-bar__inner {{border?'navigation-bar--border':''}}" style="color:{{color}};background:{{background}};{{border?'--innerBorder:'+border+';':''}}{{displayStyle}}">
+
+    <view class="weui-navigation-bar__left" style="width: {{leftWidth}};">
+      <block wx:if="{{back || home}}">
+        <view wx:if="{{home}}" class="weui-navigation-bar__btn">
+          <view class="bar__btn-item bar__btn--back" catchtap="_tapBack" wx:if="{{back}}">
+            <image class="bar__btn-image" lazy-load="true" src="{{backImage}}"></image>
+          </view>
+          <view class="bar__btn-item bar__btn--home" catchtap="_tapHome" wx:if="{{home}}">
+            <image class="bar__btn-image" lazy-load="true" src="{{homeImage}}"></image>
+          </view>
+        </view>
+        <block wx:else>
+          <view class="weui-navigation-bar__back" catchtap="_tapBack" wx:if="{{back}}">
+            <image class="bar__btn-image" lazy-load="true" src="{{backImage}}"></image>
+          </view>
+        </block>
+      </block>
+      <block wx:else>
+        <slot name="left"></slot>
+      </block>
+    </view>
+
+    <view class="weui-navigation-bar__center">
+      <view wx:if="{{loading}}" class="weui-navigation-bar__loading"></view>
+      <block wx:if="{{title}}">
+        <text class="bar__center-text">{{title}}</text>
+      </block>
+      <block wx:else>
+        <slot name="center"></slot>
+      </block>
+    </view>
+
+  </view>
+
+</view>

@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "u-navigation":"/components/u-navigation/index",
+    "u-authorize":"/components/u-authorize/index"
+  },
+  "navigationStyle": "custom",
+  "onReachBottomDistance": 30,
+  "enablePullDownRefresh":true
+}
